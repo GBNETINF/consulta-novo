@@ -1,0 +1,13 @@
+name: next-server
+
+services:
+  next-server:
+    container_name: next-server
+    build:
+      context: .
+      dockerfile: ./docker/images/Dockerfile
+      target: development
+    volumes:
+      - ${ROOT_DIR}:/app
+    ports:
+      - ${LOCAL_PORT}:3000

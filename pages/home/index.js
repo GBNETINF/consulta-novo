@@ -1,8 +1,8 @@
+export default function Home() {
 
-const Home = () => {
     return (
-        <h1>Home</h1>
+        <>
+            Can't be accessed page!
+        </>
     )
 }
-
-export default Home;

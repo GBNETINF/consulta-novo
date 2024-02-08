@@ -38,7 +38,7 @@ export default function Login() {
 
             setSession('token', sessionData)
 
-            router.push('/home')
+            await router.push('/home')
         } else {
             console.error('Login failed')
         }

@@ -93,3 +93,30 @@ export function destroySession(name) {
 
     cookies.set(sessionName, session, defaultSessionConfig)
 }
+
+/**
+ * Retorna o nome da session.
+ *
+ * @returns {string}
+ */
+export function getSessionName() {
+    return sessionName
+}
+
+/**
+ * Retorna o secredo para desencriptografar a session.
+ *
+ * @returns {String}
+ */
+export function getSecret() {
+    return secret
+}
+
+/**
+ * Retorna a configuração da session.
+ *
+ * @returns {{path: string, maxAge: number, sameSite: string, httpOnly: boolean, secure: boolean}}
+ */
+export function getSessionConfig() {
+    return defaultSessionConfig
+}

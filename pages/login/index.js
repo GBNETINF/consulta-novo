@@ -25,9 +25,9 @@ export default function Login() {
     const [loading, setLoading] = useState(false)
 
     async function handleSubmit(event) {
-        setLoading(true)
-
         event.preventDefault()
+
+        setLoading(true)
 
         const formData = new FormData(event.currentTarget)
         const email = formData.get('email')
@@ -40,8 +40,9 @@ export default function Login() {
         })
 
         if (response.ok) {
-            setLoading(false)
             const sessionData = await response.json()
+
+            setLoading(false)
 
             setSession('token', sessionData)
 

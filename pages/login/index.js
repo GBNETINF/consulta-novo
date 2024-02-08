@@ -1,5 +1,21 @@
+import '../../app/globals.css';
+
 import { useRouter } from 'next/router'
-import {setSession, getSession} from '@/utils/session'
+import {setSession} from '@/utils/session'
+
+import * as React from "react";
+import Image from "next/image";
+import {createTheme, ThemeProvider} from "@mui/material/styles";
+import Container from "@mui/material/Container";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
+import Link from "@mui/material/Link";
+import Copyright from "@/components/Copyright";
+
+const defaultTheme = createTheme();
 
 export default function Login() {
     const router = useRouter()
@@ -29,10 +45,62 @@ export default function Login() {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input type="email" name="email" placeholder="Email" required />
-            <input type="password" name="password" placeholder="Password" required />
-            <button type="submit">Login</button>
-        </form>
+        <ThemeProvider theme={defaultTheme}>
+            <Container className={'h-dvh flex items-center'} component="main" maxWidth="md">
+                <Box className={'w-full px-4 md:px-24 grid justify-items-center'}>
+                    <Box className={'flex justify-between gap-8 flex-col md:flex-row mb-4 md:mb-10 items-center'}>
+                        <Image
+                            src="/Logo_S_SCS.svg"
+                            alt="Logo_S_SCS"
+                            width={50}
+                            height={24}
+                            loading={"lazy"}
+                        />
+                        <Box className={'grid justify-items-center'}>
+                            <Typography component="body2" align="center">
+                                Governo do Estado de São Paulo
+                            </Typography>
+                            <Typography className={'uppercase font-bold'} component="h1" variant="h5" align="center">
+                                Secretaria de Estado da Saúde
+                            </Typography>
+                        </Box>
+                    </Box>
+                    <Box className={'mt-2'} component="form" onSubmit={handleSubmit} noValidate>
+                        <TextField
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="email"
+                            label="Email"
+                            name="email"
+                            autoFocus
+                        />
+                        <TextField
+                            margin="normal"
+                            required
+                            fullWidth
+                            name="password"
+                            label="Senha"
+                            type="password"
+                            id="password"
+                            autoComplete="current-password"
+                        />
+                        <Button className={'mt-6 mb-4 bg-blue-500'} type="submit" fullWidth variant="contained">
+                            Entrar
+                        </Button>
+                        <Grid container>
+                            <Grid item xs>
+                                <Link href="#" variant="body2">
+                                    Esqueceu sua senha?
+                                </Link>
+                            </Grid>
+                        </Grid>
+                    </Box>
+                    <div className={'mt-6'}>
+                        <Copyright/>
+                    </div>
+                </Box>
+            </Container>
+        </ThemeProvider>
     )
 }

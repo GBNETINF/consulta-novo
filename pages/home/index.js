@@ -1,4 +1,15 @@
-export default function Home() {
+import {fetchWithCredentials} from '@/utils/fetchWithCredentials'
+
+const Home = () => {
+
+    console.log(
+        fetchWithCredentials(
+            'auth/me',
+            {
+                method: 'POST',
+            }
+        )
+    )
 
     return (
         <>
@@ -6,3 +17,5 @@ export default function Home() {
         </>
     )
 }
+
+export default Home;

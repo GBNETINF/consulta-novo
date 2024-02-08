@@ -14,13 +14,19 @@ import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
 import Copyright from "@/components/Copyright";
+import LoadingButton from '@mui/lab/LoadingButton';
+import {useState} from "react";
 
 const defaultTheme = createTheme();
 
 export default function Login() {
     const router = useRouter()
 
+    const [loading, setLoading] = useState(false)
+
     async function handleSubmit(event) {
+        setLoading(true)
+
         event.preventDefault()
 
         const formData = new FormData(event.currentTarget)
@@ -34,6 +40,7 @@ export default function Login() {
         })
 
         if (response.ok) {
+            setLoading(false)
             const sessionData = await response.json()
 
             setSession('token', sessionData)
@@ -41,6 +48,7 @@ export default function Login() {
             router.push('/home')
         } else {
             console.error('Login failed')
+            setLoading(false)
         }
     }
 
@@ -74,6 +82,7 @@ export default function Login() {
                             label="Email"
                             name="email"
                             autoFocus
+                            disabled={loading}
                         />
                         <TextField
                             margin="normal"
@@ -84,10 +93,11 @@ export default function Login() {
                             type="password"
                             id="password"
                             autoComplete="current-password"
+                            disabled={loading}
                         />
-                        <Button className={'mt-6 mb-4 bg-blue-500'} type="submit" fullWidth variant="contained">
+                        <LoadingButton loading={loading} className={'mt-6 mb-4 bg-blue-500'} type="submit" fullWidth variant="contained">
                             Entrar
-                        </Button>
+                        </LoadingButton>
                         <Grid container>
                             <Grid item xs>
                                 <Link href="#" variant="body2">

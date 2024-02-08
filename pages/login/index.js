@@ -1,21 +1,21 @@
 import '../../app/globals.css';
 
-import { useRouter } from 'next/router'
-import {setSession} from '@/utils/session'
-
 import * as React from "react";
+import {useState} from "react";
+import {useRouter} from 'next/router'
+import {setSession} from '@/utils/session'
 import Image from "next/image";
 import {createTheme, ThemeProvider} from "@mui/material/styles";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
-import Copyright from "@/components/Copyright";
 import LoadingButton from '@mui/lab/LoadingButton';
-import {useState} from "react";
+import {Snackbar} from "@mui/material";
+import Copyright from "@/components/Copyright";
+import {Alert} from "@mui/lab";
 
 const defaultTheme = createTheme();
 
@@ -23,6 +23,14 @@ export default function Login() {
     const router = useRouter()
 
     const [loading, setLoading] = useState(false)
+
+    const [snackbar, setSnackbar] = React.useState({
+        open: false,
+        message: ''
+    });
+    const handleCloseSnackbar = () => {
+        setSnackbar({open: false, message: ''})
+    };
 
     async function handleSubmit(event) {
         event.preventDefault()
@@ -48,21 +56,47 @@ export default function Login() {
 
             await router.push('/home')
         } else {
-            console.error('Login failed')
+            setSnackbar({open: true, message: 'Email ou senha inválido.'})
             setLoading(false)
         }
     }
 
     return (
         <ThemeProvider theme={defaultTheme}>
+            <Image className={'absolute top-5 left-8'}
+                src="/Logo_SCS_dark.svg"
+                alt="Logo_SCS_dark"
+                width={130}
+                height={34}
+                loading={"lazy"}
+            />
             <Container className={'h-dvh flex items-center'} component="main" maxWidth="md">
+                <Snackbar
+                    open={snackbar.open}
+                    onClose={handleCloseSnackbar}
+                    anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'center'
+                    }}
+                    autoHideDuration={6000}
+                >
+                    <Alert
+                        onClose={handleCloseSnackbar}
+                        severity="error"
+                        variant="filled"
+                        sx={{ width: '100%' }}
+                    >
+                        {snackbar.message}
+                    </Alert>
+                </Snackbar>
+
                 <Box className={'w-full px-4 md:px-24 grid justify-items-center'}>
-                    <Box className={'flex justify-between gap-8 flex-col md:flex-row mb-4 md:mb-10 items-center'}>
+                    <Box className={'flex justify-between gap-6 flex-col md:flex-row mb-4 md:mb-10 items-center'}>
                         <Image
-                            src="/Logo_S_SCS.svg"
-                            alt="Logo_S_SCS"
-                            width={50}
-                            height={24}
+                            src="/Logo_SP.png"
+                            alt="Logo_SP"
+                            width={80}
+                            height={54}
                             loading={"lazy"}
                         />
                         <Box className={'grid justify-items-center'}>

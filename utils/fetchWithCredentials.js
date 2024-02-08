@@ -9,8 +9,12 @@ const API_URL = 'http://localhost:8083/api/'
  */
 function getAuthorization()
 {
-    const token = getSession('token') ?? ''
-    return 'Bearer ' + token
+    const token = getSession('token')
+
+    if (token === null)
+        return ''
+
+    return `${token.token_type} ` + token.access_token
 }
 
 /**

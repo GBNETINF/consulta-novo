@@ -1,21 +1,10 @@
-import {fetchWithCredentials} from '@/utils/fetchWithCredentials'
+import Layout from "@/components/Layout";
 
 const Home = () => {
-
-    console.log(
-        fetchWithCredentials(
-            'auth/me',
-            {
-                method: 'POST',
-            }
-        )
-    )
-
     return (
-        <>
-            Can't be accessed page!
-        </>
-    )
+        <Layout>
+        </Layout>
+    );
 }
 
-export default Home;
+export default Home

@@ -1,7 +1,18 @@
-export default function MyApp({ Component, pageProps }) {
+import '../app/globals.css';
+import * as React from "react";
+import {createTheme, ThemeProvider} from "@mui/material/styles";
+
+const MyApp = ({ Component, pageProps }) => {
+
+    const defaultTheme = createTheme();
+
     return (
         <>
-        <Component {...pageProps} />
+            <ThemeProvider theme={defaultTheme}>
+                <Component {...pageProps} />
+            </ThemeProvider>
         </>
     )
 }
+
+export default MyApp

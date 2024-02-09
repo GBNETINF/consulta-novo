@@ -6,6 +6,10 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+
+  --sys-gray-dark: #343A40;
+  --sys-gray-extra-light: #efefef;
+  --sys-gray-light: #c0c0c0;
 }
 
 /*
@@ -20,6 +24,20 @@
 body {
   color: rgb(var(--foreground-rgb));
   background: rgb(var(--background-end-rgb));
+}
+
+.sys-scrollbar::-webkit-scrollbar {
+  width: 0.4em;
+}
+
+.sys-scrollbar::-webkit-scrollbar-track {
+  background-color: var(--sys-gray-extra-light);
+  border-radius: 5px;
+}
+
+.sys-scrollbar::-webkit-scrollbar-thumb {
+  background-color: var(--sys-gray-light);
+  border-radius: 5px;
 }
 
 @layer utilities {

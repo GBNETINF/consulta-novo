@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import {getSession} from '@/utils/session'
 
-const API_URL = 'http://localhost:8083/api/'
+const API_URL = process.env.API_URL
 
 /**
  * Retorna o valor de "Authorization" pronto.

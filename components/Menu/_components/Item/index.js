@@ -10,13 +10,14 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
  * @returns {JSX.Element}
  * @constructor
  */
-const Item = ({item, openMenu, onClick}) => {
+const Item = ({item, openMenu, onClick, sx, children}) => {
     return (
-        <ListItemButton href={item.href} onClick={onClick}>
+        <ListItemButton href={item.href} onClick={onClick} sx={sx}>
             <ListItemIcon title={item.name}>
                 <DashboardIcon/>
             </ListItemIcon>
             <ListItemText primary={openMenu ? item.name : ''}/>
+            {children}
         </ListItemButton>
     )
 }

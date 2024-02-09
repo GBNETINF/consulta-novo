@@ -7,18 +7,12 @@ import List from "@mui/material/List";
 import Box from "@mui/material/Box";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
-import DashboardIcon from "@mui/icons-material/Dashboard";
 import ListItemText from "@mui/material/ListItemText";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import PeopleIcon from "@mui/icons-material/People";
-import BarChartIcon from "@mui/icons-material/BarChart";
-import {ExpandLess, ExpandMore, StarBorder} from "@mui/icons-material";
-import {Collapse} from "@mui/material";
-import LayersIcon from "@mui/icons-material/Layers";
 import LogoutIcon from "@mui/icons-material/Logout";
 import Copyright from "@/components/Copyright";
 import Drawer from "@/components/Menu/_components/Drawer";
 import Item from "@/components/Menu/_components/Item";
+import ItemGroup from "@/components/Menu/_components/ItemGroup";
 
 const Menu = ({openMenu, toggleMenu, drawerWidth}) => {
     const [openItem, setOpenItem] = React.useState(false);
@@ -48,6 +42,51 @@ const Menu = ({openMenu, toggleMenu, drawerWidth}) => {
             href: '',
             name: 'Inicio 4'
         },
+        {
+            id: '9',
+            group: {
+                id: '5',
+                href: '',
+                name: 'Inicio 5'
+            },
+            itens: [
+                {
+                    id: '6',
+                    href: '',
+                    name: 'Inicio 1'
+                },
+                {
+                    id: '90',
+                    group: {
+                        id: '9',
+                        href: '',
+                        name: 'Inicio 9'
+                    },
+                    itens: [
+                        {
+                            id: '10',
+                            href: '',
+                            name: 'Inicio 10'
+                        },
+                        {
+                            id: '11',
+                            href: '',
+                            name: 'Inicio 11'
+                        },
+                        {
+                            id: '12',
+                            href: '',
+                            name: 'Inicio 12'
+                        },
+                    ]
+                },
+                {
+                    id: '8',
+                    href: '',
+                    name: 'Inicio 3'
+                },
+            ]
+        },
     ]
 
     return (
@@ -66,11 +105,16 @@ const Menu = ({openMenu, toggleMenu, drawerWidth}) => {
 
                     {itens.map((item) => {
 
-                        console.log(typeof(item))
+                        if (item.group !== undefined) {
+                            return (
+                                <ItemGroup key={item.id} item={item} openMenu={openMenu} />
+                            )
+                        } else {
+                            return (
+                                <Item key={item.id} item={item} openMenu={openMenu} />
+                            )
+                        }
 
-                       return (
-                           <Item key={item.id} item={item} openMenu={openMenu} />
-                       )
                     } )}
 
                 </Box>

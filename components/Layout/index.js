@@ -3,6 +3,8 @@ import Header from "@/components/Header";
 import Box from "@mui/material/Box";
 import Menu from "@/components/Menu";
 import {fetchWithCredentials} from "@/utils/fetchWithCredentials";
+import {CssBaseline} from "@mui/material";
+import Toolbar from "@mui/material/Toolbar";
 
 const drawerWidth = 240;
 
@@ -15,7 +17,7 @@ console.log(
     )
 )
 
-const Layout = ({ Component }) => {
+const Layout = ({children}) => {
     const [openMenu, setOpenMenu] = React.useState(true);
 
     const toggleMenu = () => {
@@ -24,6 +26,7 @@ const Layout = ({ Component }) => {
 
     return (
         <Box sx={{display: 'flex'}}>
+            <CssBaseline />
             <Header openMenu={openMenu} toggleMenu={toggleMenu} drawerWidth={drawerWidth}/>
             <Menu openMenu={openMenu} toggleMenu={toggleMenu} drawerWidth={drawerWidth}/>
             <Box component="main"
@@ -34,6 +37,8 @@ const Layout = ({ Component }) => {
                      overflow: 'auto'
                  }}
             >
+                <Toolbar />
+                {children}
             </Box>
         </Box>
     )

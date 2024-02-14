@@ -1,7 +1,7 @@
 import * as React from "react";
 import {useState} from "react";
 import {useRouter} from 'next/router'
-import {setSession} from '@/utils/session'
+import {setSession, destroySession} from '@/utils/session'
 import Image from "next/image";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
@@ -23,6 +23,8 @@ const Login = () => {
         open: false,
         message: ''
     });
+
+    destroySession('token')
 
     const handleCloseSnackbar = () => {
         setSnackbar({open: false, message: ''})
@@ -46,11 +48,11 @@ const Login = () => {
         if (response.ok) {
             const sessionData = await response.json()
 
-            setLoading(false)
-
             setSession('token', sessionData)
 
             await router.push('/home')
+
+            setLoading(false)
         } else {
             setSnackbar({open: true, message: 'Email ou senha inválido.'})
             setLoading(false)

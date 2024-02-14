@@ -2,7 +2,9 @@ import * as React from "react";
 import Header from "@/components/Header";
 import Box from "@mui/material/Box";
 import Menu from "@/components/Menu";
-import {fetchWithCredentials} from "@/utils/fetchWithCredentials";
+import fetchWithCredentials from "@/utils/fetchWithCredentials";
+import {CssBaseline} from "@mui/material";
+import Toolbar from "@mui/material/Toolbar";
 
 const drawerWidth = 240;
 

@@ -25,9 +25,13 @@ function getAuthorization()
  * @param {Object} init
  * @returns {Promise<Response>}
  */
-export async function fetchWithCredentials(input, init= {}) {
+async function fetchWithCredentials (input, init= {}){
+    const handleRedirect = (href) => {
 
-    const router = useRouter()
+        const router = useRouter()
+
+        router.push(href)
+    }
 
     if (init.headers === undefined)
         init.headers = {}
@@ -40,7 +44,9 @@ export async function fetchWithCredentials(input, init= {}) {
     const response = await fetch(API_URL + input, init)
 
     if (response.status === 401)
-        await router.push('/login')
+        await handleRedirect('/login')
 
     return response
 }
+
+export default fetchWithCredentials

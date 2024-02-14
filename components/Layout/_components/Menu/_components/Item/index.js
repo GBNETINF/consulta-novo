@@ -1,8 +1,6 @@
 import * as React from "react";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import DashboardIcon from "@mui/icons-material/Dashboard";
+import {ListItemButton, ListItemIcon, ListItemText} from "@mui/material";
+import {Icon} from "@/components";
 
 /**
  * Item simplificado do menu
@@ -11,10 +9,11 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
  * @constructor
  */
 const Item = ({item, openMenu, onClick, sx, children}) => {
+
     return (
         <ListItemButton href={item.href} onClick={onClick} sx={sx}>
             <ListItemIcon title={item.name}>
-                <DashboardIcon/>
+                <Icon name={item.icon} />
             </ListItemIcon>
             <ListItemText primary={openMenu ? item.name : ''}/>
             {children}

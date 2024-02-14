@@ -1,18 +1,7 @@
 import * as React from "react";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import Divider from "@mui/material/Divider";
-import List from "@mui/material/List";
-import Box from "@mui/material/Box";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import LogoutIcon from "@mui/icons-material/Logout";
-import Copyright from "@/components/Copyright";
-import Drawer from "@/components/Menu/_components/Drawer";
-import Item from "@/components/Menu/_components/Item";
-import ItemGroup from "@/components/Menu/_components/ItemGroup";
+import {Copyright, Icon} from "@/components";
+import {Drawer, Item, ItemGroup} from "./_components";
+import {Toolbar, IconButton, Divider, List, Box, ListItemButton, ListItemIcon, ListItemText} from "@mui/material";
 
 const Menu = ({openMenu, toggleMenu, drawerWidth}) => {
     const [openItem, setOpenItem] = React.useState(false);
@@ -25,67 +14,114 @@ const Menu = ({openMenu, toggleMenu, drawerWidth}) => {
         {
             id: '1',
             href: '',
-            name: 'Inicio 1'
+            name: 'Inicio 1',
+            icon: 'Dashboard'
         },
         {
             id: '2',
             href: '',
-            name: 'Inicio 2'
+            name: 'Inicio 2',
+            icon: 'Dashboard'
         },
         {
             id: '3',
             href: '',
-            name: 'Inicio 3'
+            name: 'Inicio 3',
+            icon: 'AirportShuttl'
         },
         {
             id: '4',
             href: '',
-            name: 'Inicio 4'
+            name: 'Inicio 4',
+            icon: 'AirportShuttle'
         },
         {
             id: '9',
             group: {
                 id: '5',
                 href: '',
-                name: 'Inicio 5'
+                name: 'Inicio 5',
+                icon: 'Topic'
             },
             itens: [
                 {
                     id: '6',
                     href: '',
-                    name: 'Inicio 1'
+                    name: 'Inicio 1',
+                    icon: 'AirportShuttle'
                 },
                 {
                     id: '90',
                     group: {
                         id: '9',
                         href: '',
-                        name: 'Inicio 9'
+                        name: 'Inicio 9',
+                        icon: 'Topic'
                     },
                     itens: [
                         {
                             id: '10',
                             href: '',
-                            name: 'Inicio 10'
+                            name: 'Inicio 10',
+                            icon: 'AirportShuttle'
                         },
                         {
                             id: '11',
                             href: '',
-                            name: 'Inicio 11'
+                            name: 'Inicio 11',
+                            icon: 'AirportShuttle'
                         },
                         {
                             id: '12',
                             href: '',
-                            name: 'Inicio 12'
+                            name: 'Inicio 12',
+                            icon: 'AirportShuttle'
                         },
                     ]
                 },
                 {
                     id: '8',
                     href: '',
-                    name: 'Inicio 3'
+                    name: 'Inicio 3',
+                    icon: ''
                 },
             ]
+        },
+        {
+            id: '20',
+            href: '',
+            name: 'Inicio 20',
+            icon: 'AirportShuttle'
+        },
+        {
+            id: '21',
+            href: '',
+            name: 'Inicio 21',
+            icon: 'AirportShuttle'
+        },
+        {
+            id: '22',
+            href: '',
+            name: 'Inicio 22',
+            icon: 'AirportShuttle'
+        },
+        {
+            id: '23',
+            href: '',
+            name: 'Inicio 203',
+            icon: 'AirportShuttle'
+        },
+        {
+            id: '24',
+            href: '',
+            name: 'Inicio 24',
+            icon: 'AirportShuttle'
+        },
+        {
+            id: '25',
+            href: '',
+            name: 'Inicio 25',
+            icon: 'AirportShuttle'
         },
     ]
 
@@ -94,7 +130,7 @@ const Menu = ({openMenu, toggleMenu, drawerWidth}) => {
 
             <Toolbar sx={{display: 'flex', alignItems: 'center', justifyContent: 'flex-end', px: [1]}}>
                 <IconButton onClick={toggleMenu}>
-                    <ChevronLeftIcon/>
+                    <Icon name={'ChevronLeft'}/>
                 </IconButton>
             </Toolbar>
 
@@ -123,7 +159,7 @@ const Menu = ({openMenu, toggleMenu, drawerWidth}) => {
                     <Divider sx={{my: 1}}/>
                     <ListItemButton>
                         <ListItemIcon>
-                            <LogoutIcon className={'rotate-180'}/>
+                            <Icon className={'rotate-180'} name={'Logout'}/>
                         </ListItemIcon>
                         <ListItemText primary="Sair"/>
                     </ListItemButton>

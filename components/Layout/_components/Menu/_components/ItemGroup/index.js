@@ -1,8 +1,7 @@
 import * as React from "react";
-import {Collapse} from "@mui/material";
-import List from "@mui/material/List";
-import Item from "@/components/Menu/_components/Item";
-import {ExpandLess, ExpandMore} from "@mui/icons-material";
+import {Collapse, Divider, List} from "@mui/material";
+import {Item} from "@/components/Layout/_components/Menu/_components/";
+import {Icon} from "@/components";
 
 /**
  * Item simplificado do menu
@@ -11,8 +10,6 @@ import {ExpandLess, ExpandMore} from "@mui/icons-material";
  * @constructor
  */
 const ItemGroup = ({item, openMenu, sx}) => {
-
-    console.log(item)
 
     const [openItemGroup, setOpenItemGroup] = React.useState(false);
 
@@ -23,7 +20,7 @@ const ItemGroup = ({item, openMenu, sx}) => {
     return (
         <>
             <Item key={item.group.id} item={item.group} openMenu={openMenu} onClick={handleClickItem} sx={sx} >
-                {openItemGroup ? <ExpandLess /> : <ExpandMore />}
+                {openItemGroup ? <Icon name={'ExpandLess'} /> : <Icon name={'ExpandMore'} /> }
             </Item>
 
             <Collapse in={openItemGroup} timeout="auto" unmountOnExit sx={sx}>
@@ -42,6 +39,8 @@ const ItemGroup = ({item, openMenu, sx}) => {
                         }
 
                     } )}
+
+                    {openMenu ? '' : <Divider/>}
                 </List>
             </Collapse>
 

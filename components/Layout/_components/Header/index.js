@@ -1,18 +1,8 @@
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
-import Box from "@mui/material/Box";
 import Image from "next/image";
 import Badge from "@mui/material/Badge";
-import NotificationsIcon from "@mui/icons-material/Notifications";
-import {Avatar} from "@mui/material";
-import AppBar from "@/components/Header/_components/AppBar";
-
-function stringAvatar(name) {
-    return {
-        children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
-    };
-}
+import {Icon} from "@/components";
+import {AppBar, ConfigMenu, NotifyMenu} from "./_components";
+import {Toolbar, IconButton, Box} from "@mui/material";
 
 const Header = ({openMenu, toggleMenu, drawerWidth}) => {
     return (
@@ -25,7 +15,7 @@ const Header = ({openMenu, toggleMenu, drawerWidth}) => {
                         onClick={toggleMenu}
                         sx={{marginRight: '36px', ...(openMenu && {display: 'none'})}}
                     >
-                        <MenuIcon/>
+                        <Icon name={'Menu'}/>
                     </IconButton>
                     <Box className={'w-full flex flex-row justify-between px-3 ' + (openMenu ? 'hidden md:flex' : '')}>
                         <Image
@@ -37,14 +27,8 @@ const Header = ({openMenu, toggleMenu, drawerWidth}) => {
                             sx={{flexGrow: 1}}
                         />
                         <Box className={'flex flex-row gap-6 items-center'}>
-                            <IconButton color="inherit">
-                                <Badge badgeContent={4} color="secondary">
-                                    <NotificationsIcon/>
-                                </Badge>
-                            </IconButton>
-                            <IconButton color="inherit">
-                                <Avatar className={'text-base bg-sys-gray-light'} {...stringAvatar('Victor Franco')} />
-                            </IconButton>
+                            <NotifyMenu />
+                            <ConfigMenu />
                         </Box>
                 </Box>
             </Toolbar>

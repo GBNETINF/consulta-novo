@@ -68,7 +68,7 @@ const ConfigMenu = () => {
                 transformOrigin={{horizontal: 'right', vertical: 'top'}}
                 anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
             >
-                <Box className={'grid flex-col justify-items-center p-4'}>
+                <Box className={'grid flex-col justify-items-center py-4 px-10'}>
                     <Tooltip title="Alterar foto">
                         <Avatar onClick={handleClose} className={'m-0 cursor-pointer'} />
                     </Tooltip>
@@ -97,7 +97,12 @@ const ConfigMenu = () => {
                 <Divider/>
                 <Tooltip title="008.159.932/02">
                     <MenuItem onClick={handleClose} className={'mt-2'}>
-                        <Avatar/> Diretor ||
+                        <Avatar/> Diretor II
+                    </MenuItem>
+                </Tooltip>
+                <Tooltip title="008.159.932/02">
+                    <MenuItem onClick={handleClose} className={'mt-2'}>
+                        <Avatar/> Diretor III (Desigado)
                     </MenuItem>
                 </Tooltip>
                 <Divider/>

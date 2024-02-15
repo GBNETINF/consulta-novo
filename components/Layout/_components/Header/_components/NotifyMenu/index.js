@@ -69,7 +69,25 @@ const NotifyMenu = () => {
                         Notificações
                     </Typography>
                 </Box>
-                <Divider/>
+                <Box className={'max-w-sm m-5 pl-2 border-l-2 border-l-sys-gray-light'}>
+                    <Box className={'flex flex-row justify-between items-center'}>
+                        <Typography variant="body1">Retificação</Typography>
+                        <IconButton>
+                            <Icon props={{fontSize: 'small'}} name={'Delete'}/>
+                        </IconButton>
+                    </Box>
+                    <Typography variant="body2">Lorem ipsum cubilia velit semper sagittis a metus, nisl iaculis ipsum venenatis etiam felis ultrices nisl, at cubilia purus feugiat condimentum nibh. faucibus turpis vulputate</Typography>
+                </Box>
+                <Box className={'max-w-sm m-5 pl-2 border-l-2 border-l-sys-gray-light'}>
+                    <Box className={'flex flex-row justify-between items-center'}>
+                        <Typography variant="body1">Retificação</Typography>
+                        <IconButton>
+                            <Icon props={{fontSize: 'small'}} name={'Delete'}/>
+                        </IconButton>
+                    </Box>
+                    <Typography variant="body2">Lorem ipsum cubilia velit semper sagittis a metus, nisl iaculis ipsum venenatis etiam felis ultrices nisl, at cubilia purus feugiat condimentum nibh. faucibus turpis vulputate</Typography>
+                </Box>
+                <Divider className={'mt-5'}/>
                 <Box className={'flex flex-col justify-items-center px-4 pt-2'}>
                     <Typography className={'text-xs'} variant="p" color="text.secondary" align="center">
                         Limpar tudo

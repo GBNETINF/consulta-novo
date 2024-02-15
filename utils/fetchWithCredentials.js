@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router'
 import {getSession} from '@/utils/session'
+import {NextResponse} from "next/server";
 
 const API_URL = 'http://localhost:8083/api/'
 
@@ -26,13 +27,6 @@ function getAuthorization()
  * @returns {Promise<Response>}
  */
 async function fetchWithCredentials (input, init= {}){
-    const handleRedirect = (href) => {
-
-        const router = useRouter()
-
-        router.push(href)
-    }
-
     if (init.headers === undefined)
         init.headers = {}
 
@@ -44,7 +38,7 @@ async function fetchWithCredentials (input, init= {}){
     const response = await fetch(API_URL + input, init)
 
     if (response.status === 401)
-        await handleRedirect('/login')
+        // await NextResponse.redirect(new URL('/login'))
 
     return response
 }

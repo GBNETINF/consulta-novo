@@ -3,32 +3,20 @@ import {useState} from "react";
 import {useRouter} from 'next/router'
 import {setSession, destroySession} from '@/utils/session'
 import Image from "next/image";
-import Container from "@mui/material/Container";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import TextField from "@mui/material/TextField";
-import Grid from "@mui/material/Grid";
-import Link from "@mui/material/Link";
-import LoadingButton from '@mui/lab/LoadingButton';
-import {Snackbar} from "@mui/material";
-import Copyright from "@/components/Copyright";
-import {Alert} from "@mui/lab";
+import {Container, Box, Typography, TextField, Grid, Link} from "@mui/material";
+import {LoadingButton} from '@mui/lab';
+import {Copyright, Alert} from "@/components";
 
 const Login = () => {
     const router = useRouter()
 
     const [loading, setLoading] = useState(false)
 
-    const [snackbar, setSnackbar] = React.useState({
-        open: false,
-        message: ''
+    const [alert, setAlert] = React.useState({
+        open: false, message: ''
     });
 
     destroySession('token')
-
-    const handleCloseSnackbar = () => {
-        setSnackbar({open: false, message: ''})
-    };
 
     async function handleSubmit(event) {
         event.preventDefault()
@@ -40,9 +28,7 @@ const Login = () => {
         const password = formData.get('password')
 
         const response = await fetch('http://localhost:8083/api/auth/login', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({email, password}),
+            method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({email, password}),
         })
 
         if (response.ok) {
@@ -54,13 +40,12 @@ const Login = () => {
 
             setLoading(false)
         } else {
-            setSnackbar({open: true, message: 'Email ou senha inválido.'})
+            setAlert({open: true, message: 'Email ou senha inválido.'})
             setLoading(false)
         }
     }
 
-    return (
-        <Container className={'h-dvh flex items-center'} component="main" maxWidth="md">
+    return (<Container className={'h-dvh flex items-center'} component="main" maxWidth="md">
             <Image className={'absolute top-5 left-8'}
                    src="/Logo_SCS_dark.svg"
                    alt="Logo_SCS_dark"
@@ -68,24 +53,10 @@ const Login = () => {
                    height={34}
                    loading={"lazy"}
             />
-            <Snackbar
-                open={snackbar.open}
-                onClose={handleCloseSnackbar}
-                anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'center'
-                }}
-                autoHideDuration={6000}
-            >
-                <Alert
-                    onClose={handleCloseSnackbar}
-                    severity="error"
-                    variant="filled"
-                    sx={{width: '100%'}}
-                >
-                    {snackbar.message}
-                </Alert>
-            </Snackbar>
+
+            <Alert open={alert.open} message={alert.message} handlleClose={() => {
+                setAlert({open: false, message: ''})
+            }}/>
 
             <Box className={'w-full px-4 md:px-24 grid justify-items-center'}>
                 <Box className={'flex justify-between gap-6 flex-col md:flex-row mb-4 md:mb-10 items-center'}>
@@ -143,8 +114,7 @@ const Login = () => {
                     <Copyright/>
                 </div>
             </Box>
-        </Container>
-    )
+        </Container>)
 }
 
 export default Login

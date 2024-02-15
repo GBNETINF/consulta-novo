@@ -15,7 +15,5 @@ export default async function userAuth(session = null) {
             session = await jwt.verify(session, getSecret())
     }
 
-    console.log(session)
-
     return session?.token ?? false;
 }

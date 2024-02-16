@@ -1,4 +1,3 @@
-import * as React from "react";
 import {useState} from "react";
 import {useRouter} from 'next/router'
 import {setSession, destroySession} from '@/utils/session'
@@ -12,7 +11,7 @@ const Login = () => {
 
     const [loading, setLoading] = useState(false)
 
-    const [alert, setAlert] = React.useState({
+    const [alert, setAlert] = useState({
         open: false, message: ''
     });
 

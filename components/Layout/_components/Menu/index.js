@@ -1,10 +1,23 @@
-import * as React from "react";
+import {useState} from "react";
 import {Copyright, Icon} from "@/components";
 import {Drawer, Item, ItemGroup} from "./_components";
 import {Toolbar, IconButton, Divider, List, Box, ListItemButton, ListItemIcon, ListItemText} from "@mui/material";
+import {fetchWithCredentials} from "@/utils/fetch";
+import {LoadingButton} from "@mui/lab";
+import {useRouter} from "next/router";
 
 const Menu = ({openMenu, toggleMenu, menuwidth}) => {
-    const [openItem, setOpenItem] = React.useState(false);
+    const [openItem, setOpenItem] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const router = useRouter()
+
+    async function logout(a) {
+        setLoading(true)
+
+        let response = await fetchWithCredentials('auth/logout', {method: 'POST'})
+
+        router.push('/login')
+    }
 
     const handleClickItem = () => {
         setOpenItem(!openItem);
@@ -157,12 +170,16 @@ const Menu = ({openMenu, toggleMenu, menuwidth}) => {
 
                 <Box className={(openMenu ? 'h-[12%]' : 'h-[8%]') + ' overflow-hidden'}>
                     <Divider sx={{my: 1}}/>
-                    <ListItemButton>
-                        <ListItemIcon>
-                            <Icon className={'rotate-180'} name={'Logout'}/>
-                        </ListItemIcon>
-                        <ListItemText primary="Sair"/>
-                    </ListItemButton>
+                    <Box className="text-center">
+                        <LoadingButton
+                            loading={loading}
+                            onClick={logout}
+                            startIcon={<Icon name={'Logout'}/>}
+                            fullWidth={true}
+                            color="secondary">
+                            Sair
+                        </LoadingButton>
+                    </Box>
                     <Box hidden={!openMenu} className={'text-center my-2'} sx={{'fontSize': 12}}>
                         <Copyright/>
                     </Box>

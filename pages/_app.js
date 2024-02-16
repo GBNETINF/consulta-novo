@@ -4,7 +4,13 @@ import {createTheme, ThemeProvider} from "@mui/material/styles";
 
 const MyApp = ({ Component, pageProps }) => {
 
-    const defaultTheme = createTheme();
+    const defaultTheme = createTheme({
+        palette: {
+            secondary: {
+                main: '#6c757d'
+            }
+        }
+    });
 
     return (
         <>

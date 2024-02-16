@@ -5,15 +5,6 @@ import fetchWithCredentials from "@/utils/fetch";
 
 const menuwidth = 240;
 
-console.log(
-    fetchWithCredentials(
-        'auth/me',
-        {
-            method: 'POST',
-        }
-    )
-)
-
 const Layout = ({children, name, list}) => {
     const [openMenu, setOpenMenu] = React.useState(true);
 

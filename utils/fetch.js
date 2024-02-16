@@ -52,7 +52,7 @@ function redirect (href) {
  * @param {Object} init
  * @returns {Promise<Response>}
  */
-export default async function fetchWithCredentials(input, init= {}) {
+export async function fetchWithCredentials(input, init= {}) {
     init = prepareInit(init)
     init.headers[`Authorization`] = getAuthorization();
 

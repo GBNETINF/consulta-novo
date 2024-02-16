@@ -2,10 +2,10 @@ import * as React from "react";
 import {useState} from "react";
 import {useRouter} from 'next/router'
 import {setSession, destroySession} from '@/utils/session'
-import Image from "next/image";
 import {Container, Box, Typography, TextField, Grid, Link} from "@mui/material";
 import {LoadingButton} from '@mui/lab';
-import {Copyright, Alert} from "@/components";
+import {Copyright, Alert, Image} from "@/components";
+import {fetchWithoutCredentials} from "@/utils/fetch";
 
 const Login = () => {
     const router = useRouter()
@@ -27,8 +27,8 @@ const Login = () => {
         const email = formData.get('email')
         const password = formData.get('password')
 
-        const response = await fetch('http://localhost:8083/api/auth/login', {
-            method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({email, password}),
+        const response = await fetchWithoutCredentials('auth/login', {
+                method: 'POST', body: JSON.stringify({email, password}),
         })
 
         if (response.ok) {
@@ -46,12 +46,14 @@ const Login = () => {
     }
 
     return (<Container className={'h-dvh flex items-center'} component="main" maxWidth="md">
-            <Image className={'absolute top-5 left-8'}
-                   src="/Logo_SCS_dark.svg"
-                   alt="Logo_SCS_dark"
-                   width={130}
-                   height={34}
-                   loading={"lazy"}
+            <Image
+                className={'absolute top-5 left-8'}
+                src={'/Logo_SCS_dark.svg'}
+                alt={'Logo_SCS_dark'}
+                type="image/svg"
+                width={130}
+                height={34}
+                loading={"lazy"}
             />
 
             <Alert open={alert.open} message={alert.message} handlleClose={() => {
@@ -61,8 +63,9 @@ const Login = () => {
             <Box className={'w-full px-4 md:px-24 grid justify-items-center'}>
                 <Box className={'flex justify-between gap-6 flex-col md:flex-row mb-4 md:mb-10 items-center'}>
                     <Image
-                        src="/Logo_SP.png"
-                        alt="Logo_SP"
+                        src={'/Logo_SP.png'}
+                        alt={'Logo_SP'}
+                        type="image/png"
                         width={80}
                         height={54}
                         loading={"lazy"}

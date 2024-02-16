@@ -3,7 +3,7 @@ import {Copyright, Icon} from "@/components";
 import {Drawer, Item, ItemGroup} from "./_components";
 import {Toolbar, IconButton, Divider, List, Box, ListItemButton, ListItemIcon, ListItemText} from "@mui/material";
 
-const Menu = ({openMenu, toggleMenu, drawerWidth}) => {
+const Menu = ({openMenu, toggleMenu, menuwidth}) => {
     const [openItem, setOpenItem] = React.useState(false);
 
     const handleClickItem = () => {
@@ -126,7 +126,7 @@ const Menu = ({openMenu, toggleMenu, drawerWidth}) => {
     ]
 
     return (
-        <Drawer variant="permanent" open={openMenu} drawerWidth={drawerWidth} sx={{height: '100vh', overflow: 'hidden'}}>
+        <Drawer variant="permanent" open={openMenu} menuwidth={menuwidth} sx={{height: '100vh', overflow: 'hidden'}}>
 
             <Toolbar sx={{display: 'flex', alignItems: 'center', justifyContent: 'flex-end', px: [1]}}>
                 <IconButton onClick={toggleMenu}>

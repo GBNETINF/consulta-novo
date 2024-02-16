@@ -1,12 +1,10 @@
-import Image from "next/image";
-import Badge from "@mui/material/Badge";
-import {Icon} from "@/components";
+import {Icon, Image} from "@/components";
 import {AppBar, ConfigMenu, NotifyMenu} from "./_components";
 import {Toolbar, IconButton, Box} from "@mui/material";
 
-const Header = ({openMenu, toggleMenu, drawerWidth}) => {
+const Header = ({openMenu, toggleMenu, menuwidth}) => {
     return (
-        <AppBar position="absolute" open={openMenu} drawerWidth={drawerWidth}>
+        <AppBar position="absolute" open={openMenu} menuwidth={menuwidth}>
             <Toolbar className={'pr-6 bg-sys-gray-dark'}>
                     <IconButton
                         edge="start"
@@ -17,19 +15,18 @@ const Header = ({openMenu, toggleMenu, drawerWidth}) => {
                     >
                         <Icon name={'Menu'}/>
                     </IconButton>
-                    <Box className={'w-full flex flex-row justify-between px-3 ' + (openMenu ? 'hidden md:flex' : '')}>
-                        <Image
-                            src="/Logo_SCS.svg"
-                            alt="Logo_SCS"
-                            width={90}
-                            height={50}
-                            loading={"lazy"}
-                            sx={{flexGrow: 1}}
-                        />
-                        <Box className={'flex flex-row gap-6 items-center'}>
-                            <NotifyMenu />
-                            <ConfigMenu />
-                        </Box>
+                <Box className={'w-full flex flex-row justify-between px-3 ' + (openMenu ? 'hidden md:flex' : '')}>
+                    <Image
+                        src={'/Logo_SCS.svg'}
+                        alt={'Logo_SCS'}
+                        type="image/svg"
+                        width={90}
+                        height={50}
+                    />
+                    <Box className={'flex flex-row gap-6 items-center'}>
+                        <NotifyMenu/>
+                        <ConfigMenu/>
+                    </Box>
                 </Box>
             </Toolbar>
         </AppBar>

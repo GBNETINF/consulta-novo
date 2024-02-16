@@ -1,9 +1,9 @@
 import * as React from "react";
 import {Header, Menu, Content} from "./_components";
 import {Box, CssBaseline} from "@mui/material";
-import fetchWithCredentials from "@/utils/fetchWithCredentials";
+import fetchWithCredentials from "@/utils/fetch";
 
-const drawerWidth = 240;
+const menuwidth = 240;
 
 console.log(
     fetchWithCredentials(
@@ -24,8 +24,8 @@ const Layout = ({children, name, list}) => {
     return (
         <Box sx={{display: 'flex'}}>
             <CssBaseline />
-            <Header openMenu={openMenu} toggleMenu={toggleMenu} drawerWidth={drawerWidth}/>
-            <Menu openMenu={openMenu} toggleMenu={toggleMenu} drawerWidth={drawerWidth}/>
+            <Header openMenu={openMenu} toggleMenu={toggleMenu} menuwidth={menuwidth}/>
+            <Menu openMenu={openMenu} toggleMenu={toggleMenu} menuwidth={menuwidth}/>
             <Content name={name} list={list}>
                 {children}
             </Content>

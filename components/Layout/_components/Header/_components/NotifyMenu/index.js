@@ -25,7 +25,7 @@ const NotifyMenu = () => {
                     aria-expanded={open ? 'true' : undefined}
                 >
                     <Badge badgeContent={4} color="error">
-                        <Icon props={{className: ['text-sys-gray-light']}} name={'Notifications'}/>
+                        <Icon props={{className: 'text-sys-gray-light'}} name={'Notifications'}/>
                     </Badge>
                 </IconButton>
             </Tooltip>

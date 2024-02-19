@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router'
+import Router from 'next/router'
 import {getSession} from '@/utils/session'
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL
@@ -39,9 +39,7 @@ function prepareInit(init= {}) {
  * @param href
  */
 async function redirect (href) {
-    const router = useRouter()
-
-    await router.push(href)
+    await Router.push(href)
 }
 
 /**

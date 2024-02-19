@@ -19,18 +19,18 @@ const ItemGroup = ({item, openMenu, sx}) => {
 
     return (
         <>
-            <Item key={item.group.id} item={item.group} openMenu={openMenu} onClick={handleClickItem} sx={sx} >
+            <Item key={item.id} item={item} openMenu={openMenu} onClick={handleClickItem} sx={sx} >
                 {openItemGroup ? <Icon name={'ExpandLess'} /> : <Icon name={'ExpandMore'} /> }
             </Item>
 
             <Collapse in={openItemGroup} timeout="auto" unmountOnExit sx={sx}>
-                <List component="div" disablePadding className={'pr-4'}>
+                <List component="div" disablePadding>
 
                     {item.itens.map((itemg) => {
 
-                        if (itemg.group !== undefined) {
+                        if (itemg.itens.length > 0) {
                             return (
-                                <ItemGroup key={itemg.group.id} item={itemg} openMenu={openMenu} sx={openMenu ?  { pl: 4 } : {}} />
+                                <ItemGroup key={itemg.id} item={itemg} openMenu={openMenu} sx={openMenu ?  { pl: 4 } : {}} />
                             )
                         } else {
                             return (

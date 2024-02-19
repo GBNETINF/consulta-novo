@@ -1,10 +1,20 @@
-import {useState} from "react";
-import {Copyright, Icon} from "@/components";
-import {Drawer, Item, ItemGroup} from "@/components/Layout/_components/Menu/_components";
-import {Toolbar, IconButton, Divider, List, Box} from "@mui/material";
-import {fetchWithCredentials} from "@/utils/fetch";
-import {LoadingButton} from "@mui/lab";
+import {useState, useEffect} from "react";
 import {useRouter} from "next/router";
+import {Copyright, Icon} from "@/components";
+import {fetchWithCredentials} from "@/utils/fetch";
+import {Drawer, Item, ItemGroup} from "@/components/Layout/_components/Menu/_components";
+import {
+    Toolbar,
+    IconButton,
+    Divider,
+    List,
+    Box,
+    ListItemIcon,
+    ListItemText,
+    ListItemButton,
+    Skeleton
+} from "@mui/material";
+import {LoadingButton} from "@mui/lab";
 
 /**
  * @param openMenu
@@ -16,8 +26,9 @@ import {useRouter} from "next/router";
 const Menu = ({openMenu, toggleMenu, menuwidth}) => {
 
     const router = useRouter()
-
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(false)
+    const [loadingItens, setLoadingItens] = useState(true)
+    const [itens, setItens] = useState([])
 
     /**
      * Desloga o usuario
@@ -28,123 +39,21 @@ const Menu = ({openMenu, toggleMenu, menuwidth}) => {
 
         await fetchWithCredentials('auth/logout', {method: 'POST'})
 
-        await router.push(`/login`);
+        await router.push(`/login`)
     }
 
-    const itens = [
-        {
-            id: '1',
-            href: '',
-            name: 'Inicio 1',
-            icon: 'Dashboard'
-        },
-        {
-            id: '2',
-            href: '',
-            name: 'Inicio 2',
-            icon: 'Dashboard'
-        },
-        {
-            id: '3',
-            href: '',
-            name: 'Inicio 3',
-            icon: 'AirportShuttl'
-        },
-        {
-            id: '4',
-            href: '',
-            name: 'Inicio 4',
-            icon: 'AirportShuttle'
-        },
-        {
-            id: '9',
-            group: {
-                id: '5',
-                href: '',
-                name: 'Inicio 5',
-                icon: 'Topic'
-            },
-            itens: [
-                {
-                    id: '6',
-                    href: '',
-                    name: 'Inicio 1',
-                    icon: 'AirportShuttle'
-                },
-                {
-                    id: '90',
-                    group: {
-                        id: '9',
-                        href: '',
-                        name: 'Inicio 9',
-                        icon: 'Topic'
-                    },
-                    itens: [
-                        {
-                            id: '10',
-                            href: '',
-                            name: 'Inicio 10',
-                            icon: 'AirportShuttle'
-                        },
-                        {
-                            id: '11',
-                            href: '',
-                            name: 'Inicio 11',
-                            icon: 'AirportShuttle'
-                        },
-                        {
-                            id: '12',
-                            href: '',
-                            name: 'Inicio 12',
-                            icon: 'AirportShuttle'
-                        },
-                    ]
-                },
-                {
-                    id: '8',
-                    href: '',
-                    name: 'Inicio 3',
-                    icon: ''
-                },
-            ]
-        },
-        {
-            id: '20',
-            href: '',
-            name: 'Inicio 20',
-            icon: 'AirportShuttle'
-        },
-        {
-            id: '21',
-            href: '',
-            name: 'Inicio 21',
-            icon: 'AirportShuttle'
-        },
-        {
-            id: '22',
-            href: '',
-            name: 'Inicio 22',
-            icon: 'AirportShuttle'
-        },
-        {
-            id: '23',
-            href: '',
-            name: 'Inicio 203',
-            icon: 'AirportShuttle'
-        },
-        {
-            id: '24',
-            href: '',
-            name: 'Inicio 24',
-            icon: 'AirportShuttle'
-        },
-        {
-            id: '25',
-            href: '',
-            name: 'Inicio 25',
-            icon: 'AirportShuttle'
-        },
-    ]
+    useEffect(() => {
+        async function getMenuData() {
+            let response = await fetchWithCredentials('menus')
+
+            let itens = await response.json()
+
+            setItens(itens)
+            setLoadingItens(false)
+        }
+
+        getMenuData()
+    }, [])
 
     return (
         <Drawer variant="permanent" open={openMenu} menuwidth={menuwidth} sx={{height: '100vh', overflow: 'hidden'}}>
@@ -158,24 +67,35 @@ const Menu = ({openMenu, toggleMenu, menuwidth}) => {
             <Divider/>
 
             <List className={'h-full overflow-hidden flex flex-col justify-between'} component="nav">
-                <Box
-                    className={(openMenu ? 'h-[89%]' : 'h-[93%]') + ' overflow-y-auto overflow-x-hidden sys-scrollbar text-wrap'}>
+                {!loadingItens ?
+                    (<Box
+                        className={(openMenu ? 'h-[89%]' : 'h-[93%]') + ' overflow-y-auto overflow-x-hidden sys-scrollbar text-wrap'}>
 
-                    {itens.map((item) => {
+                        {itens.map((item) => {
 
-                        if (item.group !== undefined) {
-                            return (
-                                <ItemGroup key={item.id} item={item} openMenu={openMenu}/>
-                            )
-                        } else {
-                            return (
-                                <Item key={item.id} item={item} openMenu={openMenu}/>
-                            )
-                        }
+                            if (item.itens.length > 0) {
+                                return (
+                                    <ItemGroup key={item.id} item={item} openMenu={openMenu}/>
+                                )
+                            } else {
+                                return (
+                                    <Item key={item.id} item={item} openMenu={openMenu}/>
+                                )
+                            }
 
-                    })}
+                        })}
 
-                </Box>
+                    </Box>)
+                :
+                    (<Box className={(openMenu ? 'h-[89%]' : 'h-[93%]') + ' overflow-y-auto overflow-x-hidden sys-scrollbar text-wrap'}>
+                        <ListItemButton href='' sx={{}}>
+                            <ListItemIcon title='loading'>
+                                <Skeleton variant="rounded" width={25} height={25} animation="wave"/>
+                            </ListItemIcon>
+                            <Skeleton variant="rounded" width={120} height={16} animation="wave"/>
+                        </ListItemButton>
+                    </Box>)
+                }
 
                 <Box className={(openMenu ? 'h-[11%]' : 'h-[7%]') + ' overflow-hidden'}>
                     <Divider sx={{my: 1}}/>

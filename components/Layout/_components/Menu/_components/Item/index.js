@@ -11,10 +11,10 @@ const Item = ({item, openMenu, onClick, sx, children}) => {
 
     return (
         <ListItemButton href={item.href} onClick={onClick} sx={sx}>
-            <ListItemIcon title={item.name}>
-                <Icon name={item.icon} />
+            <ListItemIcon title={item.nome}>
+                <Icon name={item.icone} />
             </ListItemIcon>
-            <ListItemText primary={openMenu ? item.name : ''}/>
+            <ListItemText primary={openMenu ? item.nome : ''}/>
             {children}
         </ListItemButton>
     )

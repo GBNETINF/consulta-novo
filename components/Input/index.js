@@ -1,7 +1,6 @@
 import {FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton, FormHelperText} from "@mui/material";
 import {Icon} from "@/components";
-import {forwardRef, useState} from "react";
-import {IMaskInput} from "react-imask";
+import {useState} from "react";
 
 /**
  * @param id
@@ -47,13 +46,10 @@ const Index = ({
     endAdornment,
     onChange,
     inputCustom = '',
-    inputMask = '',
 }) => {
     let inputComponent
 
     const [typeInput, setTypeInput] = useState(type)
-
-    const [valueInput, setValueInput] = useState(value)
 
     /** Altera o "Type" para text */
     function setTypeText() {
@@ -64,9 +60,6 @@ const Index = ({
     function setTypePassword() {
         setTypeInput('password')
     }
-
-    /** Altera o value do input */
-    function setValeu(event) { setValueInput(event.target.value) }
 
     /** Define padrões de input */
     switch (inputCustom) {
@@ -87,34 +80,6 @@ const Index = ({
             break;
     }
 
-    /** Define mascaras padrões */
-    if (inputMask !== '')
-    {
-        onChange = setValeu
-
-        inputComponent = forwardRef(function TextMaskCustom(props, ref) {
-            const { onChange, ...other } = props;
-
-            return (
-                <IMaskInput
-                    {...other}
-                    mask={inputMask}
-                    definitions={{
-                        '#': /[1-9]/,
-                        '0': /[0-9]/,
-                    }}
-                    inputRef={ref}
-                    onAccept={(value) => onChange({ target: { name: props.name, value } })}
-                    overwrite
-                    blocks={{
-                        CPF: { mask: '000.000.000-00' },
-                        Phone: { mask: '(00) 00000-0000' },
-                    }}
-                />
-            );
-        });
-    }
-
     return (
         <FormControl error={error} variant={variant} margin={margin} fullWidth={fullWidth}>
             <InputLabel htmlFor={id}>{label}</InputLabel>
@@ -122,14 +87,13 @@ const Index = ({
                 id={id}
                 name={name}
                 label={label}
-                value={valueInput}
+                value={value}
                 type={typeInput}
                 required={required}
                 disabled={disabled}
                 endAdornment={endAdornment}
                 autoComplete={autoComplete}
                 autoFocus={autoFocus}
-                inputComponent={inputComponent}
                 onChange={onChange}
                 maxLength={maxLength}
             />

@@ -1,6 +1,7 @@
 import {FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton, FormHelperText} from "@mui/material";
 import {Icon} from "@/components";
-import {useState} from "react";
+import {useState, forwardRef} from "react";
+import {IMaskInput} from "react-imask";
 
 /**
  * @param id
@@ -42,12 +43,13 @@ const Index = ({
     margin = 'normal',
     autoComplete = '',
     helperText = '',
+    mask = '',
     maxLength,
     endAdornment,
     onChange,
     inputCustom = '',
 }) => {
-    let inputComponent
+    let MaskInput
 
     const [typeInput, setTypeInput] = useState(type)
 
@@ -80,6 +82,27 @@ const Index = ({
             break;
     }
 
+    if (mask !== '')
+    {
+        MaskInput = forwardRef(function MaskInput(props, ref) {
+            const { onChange, ...other } = props;
+            return (
+                <IMaskInput
+                    {...other}
+                    mask={mask}
+                    definitions={{
+                        '0': /[0-9]/,
+                        '#': /[1-9]/,
+                    }}
+                    inputRef={ref}
+                    onAccept={(value) => onChange({ target: { name: props.name, value } })}
+                    overwrite
+                />
+            );
+        });
+    }
+   
+
     return (
         <FormControl error={error} variant={variant} margin={margin} fullWidth={fullWidth}>
             <InputLabel htmlFor={id}>{label}</InputLabel>
@@ -96,6 +119,7 @@ const Index = ({
                 autoFocus={autoFocus}
                 onChange={onChange}
                 maxLength={maxLength}
+                inputComponent={MaskInput}
             />
             { helperText ? <FormHelperText id={id}>{helperText}</FormHelperText> : ''}
         </FormControl>

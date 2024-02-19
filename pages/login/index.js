@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useRouter} from 'next/router'
 import {setSession, destroySession} from '@/utils/session'
 import {Container, Box, Typography, Grid, Link} from "@mui/material";
@@ -14,6 +14,12 @@ const Login = () => {
     const [alert, setAlert] = useState({
         open: false, message: ''
     });
+
+    const [cpf, setCpf] = useState('')
+
+    useEffect(() => {
+        console.log(cpf)
+    }, [cpf]);
 
     destroySession('token')
 
@@ -89,18 +95,21 @@ const Login = () => {
                     name="cpf"
                     label="CPF"
                     type={'text'}
+                    value={cpf}
                     required={true}
                     fullWidth={true}
                     autoFocus={true}
-                    inputMask='CPF'
                     disabled={loading}
                     error={true}
+                    mask={'000.000.000-00'}
+                    onChange={(e) => {setCpf(e.target.value)}}
                     helperText={'Incorrect'}
                 />
                 <Input
                     id="password"
                     name="password"
                     label="Senha"
+                    type='password'
                     required={true}
                     fullWidth={true}
                     disabled={loading}

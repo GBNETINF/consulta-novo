@@ -1,5 +1,9 @@
 import Typography from "@mui/material/Typography";
 
+/**
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const Copyright = () => {
     return (
         <Typography variant="p" color="text.secondary" align="center">

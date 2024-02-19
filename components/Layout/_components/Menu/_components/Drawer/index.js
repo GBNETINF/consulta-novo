@@ -1,6 +1,10 @@
 import {styled} from "@mui/material/styles";
 import MuiDrawer from "@mui/material/Drawer";
 
+/**
+ * Esse componente foi copiado proto do "Material UI"
+ */
+
 const Drawer = styled(MuiDrawer, {shouldForwardProp: (prop) => prop !== 'open'})(
     ({theme, open, menuwidth}) => ({
         '& .MuiDrawer-paper': {

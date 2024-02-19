@@ -1,10 +1,14 @@
-import * as React from 'react';
-import {Avatar, Menu, MenuItem, Divider, IconButton, Tooltip, Typography, Box, Badge} from '@mui/material';
+import {useState, Fragment} from 'react';
+import {Menu, Divider, IconButton, Tooltip, Typography, Box, Badge} from '@mui/material';
 import {Icon} from "@/components";
 
+/**
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const NotifyMenu = () => {
 
-    const [anchorEl, setAnchorEl] = React.useState(null);
+    const [anchorEl, setAnchorEl] = useState(null);
 
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -15,7 +19,7 @@ const NotifyMenu = () => {
     };
 
     return (
-        <React.Fragment>
+        <Fragment>
             <Tooltip title="Notificações">
                 <IconButton
                     onClick={handleClick}
@@ -76,7 +80,9 @@ const NotifyMenu = () => {
                             <Icon props={{fontSize: 'small'}} name={'Delete'}/>
                         </IconButton>
                     </Box>
-                    <Typography variant="body2">Lorem ipsum cubilia velit semper sagittis a metus, nisl iaculis ipsum venenatis etiam felis ultrices nisl, at cubilia purus feugiat condimentum nibh. faucibus turpis vulputate</Typography>
+                    <Typography variant="body2">Lorem ipsum cubilia velit semper sagittis a metus, nisl iaculis ipsum
+                        venenatis etiam felis ultrices nisl, at cubilia purus feugiat condimentum nibh. faucibus turpis
+                        vulputate</Typography>
                 </Box>
                 <Box className={'max-w-sm m-5 pl-2 border-l-2 border-l-sys-gray-light'}>
                     <Box className={'flex flex-row justify-between items-center'}>
@@ -85,7 +91,9 @@ const NotifyMenu = () => {
                             <Icon props={{fontSize: 'small'}} name={'Delete'}/>
                         </IconButton>
                     </Box>
-                    <Typography variant="body2">Lorem ipsum cubilia velit semper sagittis a metus, nisl iaculis ipsum venenatis etiam felis ultrices nisl, at cubilia purus feugiat condimentum nibh. faucibus turpis vulputate</Typography>
+                    <Typography variant="body2">Lorem ipsum cubilia velit semper sagittis a metus, nisl iaculis ipsum
+                        venenatis etiam felis ultrices nisl, at cubilia purus feugiat condimentum nibh. faucibus turpis
+                        vulputate</Typography>
                 </Box>
                 <Divider className={'mt-5'}/>
                 <Box className={'flex flex-col justify-items-center px-4 pt-2'}>
@@ -94,7 +102,7 @@ const NotifyMenu = () => {
                     </Typography>
                 </Box>
             </Menu>
-        </React.Fragment>
+        </Fragment>
     );
 }
 

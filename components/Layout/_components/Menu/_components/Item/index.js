@@ -1,4 +1,3 @@
-import * as React from "react";
 import {ListItemButton, ListItemIcon, ListItemText} from "@mui/material";
 import {Icon} from "@/components";
 

@@ -1,9 +1,12 @@
 import {Snackbar} from "@mui/material";
 import AlertLab from "@mui/lab/Alert";
 
-import * as React from "react";
-
-function getThePositionByLetter(latter= '') {
+/**
+ * Retorna a string da posição
+ * @param latter
+ * @returns {*|string}
+ */
+function getThePositionByLetter(latter = '') {
 
     const lattetPosition = {
         t: 'top',
@@ -16,7 +19,12 @@ function getThePositionByLetter(latter= '') {
     return lattetPosition[latter] ?? ''
 }
 
-function treatPosition(position = ''){
+/**
+ * Monta um objeto informando a posição vertical e horizantal
+ * @param position
+ * @returns {{horizontal: (*|string), vertical: (*|string)}}
+ */
+function treatPosition(position = '') {
     return {
         vertical: getThePositionByLetter(`${position[0]}`),
         horizontal: getThePositionByLetter(`${position[1]}`)
@@ -25,7 +33,6 @@ function treatPosition(position = ''){
 
 /**
  * Alert com SnackBar
- *
  * @param open
  * @param message
  * @param severity
@@ -37,14 +44,15 @@ function treatPosition(position = ''){
  * @constructor
  */
 const Alert = ({
-     open= false,
-     message = '',
-     severity= 'error',
-     position = 'tc',
-     hideDuration = 6000,
-     variant= 'filled',
-     handlleClose = () => {}
-    }) => {
+                   open = false,
+                   message = '',
+                   severity = 'error',
+                   position = 'tc',
+                   hideDuration = 6000,
+                   variant = 'filled',
+                   handlleClose = () => {
+                   }
+               }) => {
 
     return (
         <Snackbar

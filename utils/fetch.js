@@ -14,7 +14,7 @@ function getAuthorization()
     if (token === null)
         return ''
 
-    return `${token.token_type} ` + token.access_token
+    return `${token.token_type} ${token.access_token}`
 }
 
 /**
@@ -38,10 +38,10 @@ function prepareInit(init= {}) {
  * Redireciona o server
  * @param href
  */
-function redirect (href) {
+async function redirect (href) {
     const router = useRouter()
 
-    router.push(href).then(r => false)
+    await router.push(href)
 }
 
 /**

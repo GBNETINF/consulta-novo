@@ -1,16 +1,25 @@
-import * as React from 'react';
+import {useState, Fragment} from 'react';
 import {Avatar, Menu, MenuItem, Divider, IconButton, Tooltip, Typography, Box} from '@mui/material';
 import {Icon} from "@/components";
 
+/**
+ * Retona as duas primiras letras no nome
+ * @param name
+ * @returns {{children: string}}
+ */
 function stringAvatar(name) {
     return {
         children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
     };
 }
 
+/**
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const ConfigMenu = () => {
 
-    const [anchorEl, setAnchorEl] = React.useState(null);
+    const [anchorEl, setAnchorEl] = useState(null);
 
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -21,7 +30,7 @@ const ConfigMenu = () => {
     };
 
     return (
-        <React.Fragment>
+        <Fragment>
             <Tooltip title="Configurações">
                 <IconButton
                     onClick={handleClick}
@@ -70,7 +79,7 @@ const ConfigMenu = () => {
             >
                 <Box className={'grid flex-col justify-items-center py-4 px-10'}>
                     <Tooltip title="Alterar foto">
-                        <Avatar onClick={handleClose} className={'m-0 cursor-pointer'} />
+                        <Avatar onClick={handleClose} className={'m-0 cursor-pointer'}/>
                     </Tooltip>
                     <Typography className={'mt-2'} variant="p" align="center">
                         Victor Ferreira Franco
@@ -84,12 +93,12 @@ const ConfigMenu = () => {
                     <Box className={'flex flex-row gap-2 mt-4'}>
                         <Tooltip title="Alterar senha">
                             <Avatar onClick={handleClose} className={'cursor-pointer'}>
-                                <Icon name={'Key'} />
+                                <Icon name={'Key'}/>
                             </Avatar>
                         </Tooltip>
                         <Tooltip title="Manual">
                             <Avatar onClick={handleClose} className={'cursor-pointer'}>
-                                <Icon name={'AutoStories'} />
+                                <Icon name={'AutoStories'}/>
                             </Avatar>
                         </Tooltip>
                     </Box>
@@ -112,7 +121,7 @@ const ConfigMenu = () => {
                     </Typography>
                 </Box>
             </Menu>
-        </React.Fragment>
+        </Fragment>
     );
 }
 

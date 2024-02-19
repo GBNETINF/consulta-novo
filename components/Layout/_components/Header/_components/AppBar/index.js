@@ -1,6 +1,10 @@
 import {styled} from "@mui/material/styles";
 import MuiAppBar from "@mui/material/AppBar";
 
+/**
+ * Esse componente foi copiado proto do "Material UI"
+ */
+
 const AppBar = styled(MuiAppBar, {shouldForwardProp: (prop) => prop !== 'open', })
 (({theme, open, menuwidth}) => ({
     zIndex: theme.zIndex.drawer + 1,

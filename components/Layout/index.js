@@ -1,12 +1,19 @@
-import * as React from "react";
+import {useState} from "react";
 import {Header, Menu, Content} from "./_components";
 import {Box, CssBaseline} from "@mui/material";
-import fetchWithCredentials from "@/utils/fetch";
 
+/** Tamanho do menu */
 const menuwidth = 240;
 
+/**
+ * @param children
+ * @param name
+ * @param list
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const Layout = ({children, name, list}) => {
-    const [openMenu, setOpenMenu] = React.useState(true);
+    const [openMenu, setOpenMenu] = useState(true);
 
     const toggleMenu = () => {
         setOpenMenu(!openMenu);
@@ -14,7 +21,7 @@ const Layout = ({children, name, list}) => {
 
     return (
         <Box sx={{display: 'flex'}}>
-            <CssBaseline />
+            <CssBaseline/>
             <Header openMenu={openMenu} toggleMenu={toggleMenu} menuwidth={menuwidth}/>
             <Menu openMenu={openMenu} toggleMenu={toggleMenu} menuwidth={menuwidth}/>
             <Content name={name} list={list}>

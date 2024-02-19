@@ -1,4 +1,4 @@
-import * as React from "react";
+import {useState} from "react";
 import {Collapse, Divider, List} from "@mui/material";
 import {Item} from "@/components/Layout/_components/Menu/_components/";
 import {Icon} from "@/components";
@@ -11,7 +11,7 @@ import {Icon} from "@/components";
  */
 const ItemGroup = ({item, openMenu, sx}) => {
 
-    const [openItemGroup, setOpenItemGroup] = React.useState(false);
+    const [openItemGroup, setOpenItemGroup] = useState(false);
 
     const handleClickItem = () => {
         setOpenItemGroup(!openItemGroup);

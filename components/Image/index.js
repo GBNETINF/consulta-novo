@@ -7,7 +7,8 @@
  * @param width
  * @param height
  * @param type
- *      Tipo da imagem. Ex: 'image/svg'
+ *      @description Tipo da imagem.
+ *      @example 'image/svg'
  * @param loading
  * @param className
  * @returns {JSX.Element}

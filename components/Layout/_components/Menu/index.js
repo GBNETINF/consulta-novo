@@ -1,27 +1,35 @@
 import {useState} from "react";
 import {Copyright, Icon} from "@/components";
-import {Drawer, Item, ItemGroup} from "./_components";
-import {Toolbar, IconButton, Divider, List, Box, ListItemButton, ListItemIcon, ListItemText} from "@mui/material";
+import {Drawer, Item, ItemGroup} from "@/components/Layout/_components/Menu/_components";
+import {Toolbar, IconButton, Divider, List, Box} from "@mui/material";
 import {fetchWithCredentials} from "@/utils/fetch";
 import {LoadingButton} from "@mui/lab";
 import {useRouter} from "next/router";
 
+/**
+ * @param openMenu
+ * @param toggleMenu
+ * @param menuwidth
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const Menu = ({openMenu, toggleMenu, menuwidth}) => {
-    const [openItem, setOpenItem] = useState(false);
-    const [loading, setLoading] = useState(false);
+
     const router = useRouter()
 
-    async function logout(a) {
+    const [loading, setLoading] = useState(false);
+
+    /**
+     * Desloga o usuario
+     * @returns {Promise<void>}
+     */
+    async function logout() {
         setLoading(true)
 
-        let response = await fetchWithCredentials('auth/logout', {method: 'POST'})
+        await fetchWithCredentials('auth/logout', {method: 'POST'})
 
-        router.push('/login')
+        await router.push(`/login`);
     }
-
-    const handleClickItem = () => {
-        setOpenItem(!openItem);
-    };
 
     const itens = [
         {
@@ -150,34 +158,35 @@ const Menu = ({openMenu, toggleMenu, menuwidth}) => {
             <Divider/>
 
             <List className={'h-full overflow-hidden flex flex-col justify-between'} component="nav">
-                <Box className={(openMenu ? 'h-[88%]' : 'h-[92%]') + ' overflow-y-auto overflow-x-hidden sys-scrollbar text-wrap'}>
+                <Box
+                    className={(openMenu ? 'h-[89%]' : 'h-[93%]') + ' overflow-y-auto overflow-x-hidden sys-scrollbar text-wrap'}>
 
                     {itens.map((item) => {
 
                         if (item.group !== undefined) {
                             return (
-                                <ItemGroup key={item.id} item={item} openMenu={openMenu} />
+                                <ItemGroup key={item.id} item={item} openMenu={openMenu}/>
                             )
                         } else {
                             return (
-                                <Item key={item.id} item={item} openMenu={openMenu} />
+                                <Item key={item.id} item={item} openMenu={openMenu}/>
                             )
                         }
 
-                    } )}
+                    })}
 
                 </Box>
 
-                <Box className={(openMenu ? 'h-[12%]' : 'h-[8%]') + ' overflow-hidden'}>
+                <Box className={(openMenu ? 'h-[11%]' : 'h-[7%]') + ' overflow-hidden'}>
                     <Divider sx={{my: 1}}/>
-                    <Box className="text-center">
+                    <Box className="text-center mb-4">
                         <LoadingButton
                             loading={loading}
                             onClick={logout}
                             startIcon={<Icon name={'Logout'}/>}
                             fullWidth={true}
                             color="secondary">
-                            Sair
+                            {openMenu ? 'Sair' : ''}
                         </LoadingButton>
                     </Box>
                     <Box hidden={!openMenu} className={'text-center my-2'} sx={{'fontSize': 12}}>

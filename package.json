@@ -21,8 +21,10 @@
     "jose": "^5.2.1",
     "jsonwebtoken": "^8.5.1",
     "next": "14.1.0",
+    "prop-types": "^15.8.1",
     "react": "^18",
     "react-dom": "^18",
+    "react-imask": "^7.4.0",
     "styled-components": "^6.1.8",
     "universal-cookie": "^7.0.2"
   },

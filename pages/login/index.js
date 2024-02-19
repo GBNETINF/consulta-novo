@@ -92,7 +92,10 @@ const Login = () => {
                     required={true}
                     fullWidth={true}
                     autoFocus={true}
+                    inputMask='CPF'
                     disabled={loading}
+                    error={true}
+                    helperText={'Incorrect'}
                 />
                 <Input
                     id="password"

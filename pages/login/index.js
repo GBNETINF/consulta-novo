@@ -97,7 +97,6 @@ const Login = () => {
                 </Box>
             </Box>
             <Box className={'mt-2'} component="form" onSubmit={handleSubmit} noValidate>
-                <Test id="teste" type="text" mask="000.000.000-00" onAccept={(value) => console.log(value)}/>
                 <Input
                     id="cpf"
                     name="cpf"
@@ -108,7 +107,7 @@ const Login = () => {
                     fullWidth={true}
                     disabled={loading}
                     error={cpfError !== ''}
-                    // mask={'000.000.000-00'}
+                    mask={'000.000.000-00'}
                     onChange={(e) => {setCpf(e.target.value)}}
                     helperText={cpfError}
                 />
@@ -120,7 +119,7 @@ const Login = () => {
                     required={true}
                     fullWidth={true}
                     disabled={loading}
-                    // inputCustom='Password'
+                    inputCustom='Password'
                     onChange={(e) => {setPassword(e.target.value)}}
                 />
                 <LoadingButton loading={loading} className={'mt-6 mb-4 bg-blue-500'} type="submit" fullWidth

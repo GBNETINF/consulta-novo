@@ -1,10 +1,16 @@
 import Router from 'next/router'
 import {getSession} from '@/utils/session'
 
+/**
+ * URL para consumo da API
+ *
+ * @type {String}
+ */
 const API_URL = process.env.NEXT_PUBLIC_API_URL
 
 /**
- * Retorna o valor de "Authorization" pronto.
+ * Retorna o valor de "Authorization" pronto
+ *
  * @returns {string}
  */
 function getAuthorization()
@@ -19,8 +25,10 @@ function getAuthorization()
 
 /**
  * Prepara o header para o feach
- * @param init
- * @returns {{}}
+ *
+ * @param {Object} init
+ *      Objeto com as configurações da requisição
+ * @returns {Object}
  */
 function prepareInit(init= {}) {
 
@@ -36,7 +44,9 @@ function prepareInit(init= {}) {
 
 /**
  * Redireciona o server
+ *
  * @param href
+ *      Local para onde deve ser feito o redirecionamento.
  */
 async function redirect (href) {
     await Router.push(href)
@@ -47,7 +57,9 @@ async function redirect (href) {
  *  Obs: caso o status for 401, o servidor é redirecionado para o login
  *
  * @param {String} input
+ *      Rota para qual vai ser realizado o consumo.
  * @param {Object} init
+ *      Dados da requisição.
  * @returns {Promise<Response>}
  */
 export async function fetchWithCredentials(input, init= {}) {

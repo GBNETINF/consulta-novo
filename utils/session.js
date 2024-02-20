@@ -2,9 +2,30 @@ import Cookie from 'universal-cookie'
 import * as jwt from 'jsonwebtoken';
 import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/postcss";
 
-const secret = 'girafa';
+/**
+ * Palavra segredo para encriptografar dados do cookie.
+ *
+ * @type {string}
+ */
+const secret = 'password-hash';
+
+/**
+ * Classe responsável pelo controle dos cookies.
+ * @type {Cookie}
+ */
 const cookies = new Cookie(null, { path: '/'})
+
+/**
+ * Nome da session que será ou está definida.
+ *
+ * @type {string}
+ */
 const sessionName = 'session'
+
+/**
+ * Configurações padrões da session.
+ * @type {{path: string, maxAge: number, sameSite: string, httpOnly: boolean, secure: boolean}}
+ */
 const defaultSessionConfig = {
     httpOnly: false,
     secure: process.env.NODE_ENV === "production",

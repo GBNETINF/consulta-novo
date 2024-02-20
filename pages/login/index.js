@@ -1,41 +1,45 @@
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {useRouter} from 'next/router'
-import {setSession, destroySession} from '@/utils/session'
+
+import {Copyright, Alert, Image, Input} from "@/components";
+import Test from '@/components/Test'
+
 import {Container, Box, Typography, Grid, Link} from "@mui/material";
 import {LoadingButton} from '@mui/lab';
-import {Copyright, Alert, Image, Input} from "@/components";
+
 import {fetchWithoutCredentials} from "@/utils/fetch";
+import {setSession, destroySession} from '@/utils/session'
+import {validateCpf} from "@/utils/validations";
 
 const Login = () => {
     const router = useRouter()
 
     const [loading, setLoading] = useState(false)
-
-    const [alert, setAlert] = useState({
-        open: false, message: ''
-    });
-
+    const [alert, setAlert] = useState({open: false, message: ''})
     const [cpf, setCpf] = useState('')
-
-    useEffect(() => {
-        console.log(cpf)
-    }, [cpf]);
+    const [cpfError, setCpfError] = useState('')
+    const [password, setPassword] = useState('')
 
     destroySession('token')
 
     /**
      * Trata o submit do formulário.
+     *
      * @param event
+     *      Evento do submit
      * @returns {Promise<void>}
      */
     async function handleSubmit(event) {
         event.preventDefault()
 
-        setLoading(true)
+        if (validateCpf(cpf)) {
+            setCpfError('CPF inválido')
 
-        const formData = new FormData(event.currentTarget)
-        const cpf = formData.get('cpf')
-        const password = formData.get('password')
+            return
+        }
+
+        setCpfError('')
+        setLoading(true)
 
         const response = await fetchWithoutCredentials('auth/login', {
             method: 'POST', body: JSON.stringify({cpf, password}),
@@ -49,10 +53,13 @@ const Login = () => {
             await router.push('/home')
 
             setLoading(false)
-        } else {
-            setAlert({open: true, message: 'CPF ou senha inválida.'})
-            setLoading(false)
+
+            return
         }
+
+        setAlert({open: true, message: 'CPF ou senha inválida.'})
+
+        setLoading(false)
     }
 
     return (<Container className={'h-dvh flex items-center'} component="main" maxWidth="md">
@@ -90,6 +97,7 @@ const Login = () => {
                 </Box>
             </Box>
             <Box className={'mt-2'} component="form" onSubmit={handleSubmit} noValidate>
+                <Test id="teste" type="text" mask="000.000.000-00" onAccept={(value) => console.log(value)}/>
                 <Input
                     id="cpf"
                     name="cpf"
@@ -98,12 +106,11 @@ const Login = () => {
                     value={cpf}
                     required={true}
                     fullWidth={true}
-                    autoFocus={true}
                     disabled={loading}
-                    error={true}
-                    mask={'000.000.000-00'}
+                    error={cpfError !== ''}
+                    // mask={'000.000.000-00'}
                     onChange={(e) => {setCpf(e.target.value)}}
-                    helperText={'Incorrect'}
+                    helperText={cpfError}
                 />
                 <Input
                     id="password"
@@ -113,7 +120,8 @@ const Login = () => {
                     required={true}
                     fullWidth={true}
                     disabled={loading}
-                    inputCustom='Password'
+                    // inputCustom='Password'
+                    onChange={(e) => {setPassword(e.target.value)}}
                 />
                 <LoadingButton loading={loading} className={'mt-6 mb-4 bg-blue-500'} type="submit" fullWidth
                                variant="contained">

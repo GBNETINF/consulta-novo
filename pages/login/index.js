@@ -1,19 +1,14 @@
 import {useState} from "react";
 import {useRouter} from 'next/router'
-
-import {Copyright, Alert, Image, Input} from "@/components";
-import Test from '@/components/Test'
-
+import {Copyright, Alert, Image, Input, Word} from "@/components";
 import {Container, Box, Typography, Grid, Link} from "@mui/material";
 import {LoadingButton} from '@mui/lab';
-
 import {fetchWithoutCredentials} from "@/utils/fetch";
 import {setSession, destroySession} from '@/utils/session'
 import {validateCpf} from "@/utils/validations";
 
 const Login = () => {
     const router = useRouter()
-
     const [loading, setLoading] = useState(false)
     const [alert, setAlert] = useState({open: false, message: ''})
     const [cpf, setCpf] = useState('')
@@ -122,9 +117,8 @@ const Login = () => {
                     inputCustom='Password'
                     onChange={(e) => {setPassword(e.target.value)}}
                 />
-                <LoadingButton loading={loading} className={'mt-6 mb-4 bg-blue-500'} type="submit" fullWidth
-                               variant="contained">
-                    Entrar
+                <LoadingButton loading={loading} className={'mt-6 mb-4 bg-blue-500'} type="submit" fullWidth variant="contained">
+                    <Word width={64} path="sistema.botoes.entrar"/>
                 </LoadingButton>
                 <Grid container>
                     <Grid item xs>

@@ -9,3 +9,5 @@ export { default as Image } from './Image';
 export { default as Input } from './Input';
 
 export { default as Layout } from './Layout';
+
+export { default as Word } from './Word';

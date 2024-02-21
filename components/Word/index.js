@@ -1,11 +1,15 @@
 import {getDictionary} from "@/utils/dictionary";
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import {Skeleton} from "@mui/material";
 
-export default function Word({path, width, height = 16, debug = false}) {
+export default function Word({path, width, height = 16}) {
     const dictionary = path.split('.').shift()
     const [loading, setLoading] = useState(true)
     const [word, setWord] = useState('')
+
+    useEffect(() => {
+        loadWord().then(() => setLoading(false))
+    }, []);
 
     async function loadWord() {
         let dict = await getDictionary(dictionary)
@@ -19,8 +23,6 @@ export default function Word({path, width, height = 16, debug = false}) {
 
         setWord(word)
     }
-
-    loadWord().then(() => setLoading(debug))
 
     return (
         <>{!loading ? word : (<Skeleton variant="rounded" width={width} height={height} animation="wave"></Skeleton>)}</>

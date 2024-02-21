@@ -8,7 +8,8 @@
     "esqueceu_senha": "Esqueceu sua senha?"
   },
   "botoes": {
-    "entrar": "Entrar"
+    "entrar": "Entrar",
+    "sair": "Sair"
   },
   "inputs": {
     "cpf": "CPF",

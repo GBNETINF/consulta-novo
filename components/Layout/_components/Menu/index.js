@@ -1,6 +1,6 @@
 import {useState, useEffect} from "react";
 import {useRouter} from "next/router";
-import {Copyright, Icon} from "@/components";
+import {Copyright, Icon, Word} from "@/components";
 import {fetchWithCredentials} from "@/utils/fetch";
 import {Drawer, Item, ItemGroup} from "@/components/Layout/_components/Menu/_components";
 import {
@@ -106,7 +106,7 @@ const Menu = ({openMenu, toggleMenu, menuwidth}) => {
                             startIcon={<Icon name={'Logout'}/>}
                             fullWidth={true}
                             color="secondary">
-                            {openMenu ? 'Sair' : ''}
+                            {openMenu ? <Word width={64} path="sistema.botoes.sair"/> : ''}
                         </LoadingButton>
                     </Box>
                     <Box hidden={!openMenu} className={'text-center my-2'} sx={{'fontSize': 12}}>

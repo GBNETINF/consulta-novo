@@ -1,7 +1,7 @@
 import {useState} from "react";
 import {useRouter} from 'next/router'
 import {Copyright, Alert, Image, Input, Word} from "@/components";
-import {Container, Box, Typography, Grid, Link} from "@mui/material";
+import {Container, Box, Typography, Grid, Link, TextField} from "@mui/material";
 import {LoadingButton} from '@mui/lab';
 import {fetchWithoutCredentials} from "@/utils/fetch";
 import {setSession, destroySession} from '@/utils/session'
@@ -27,7 +27,7 @@ const Login = () => {
     async function handleSubmit(event) {
         event.preventDefault()
 
-        if (validateCpf(cpf)) {
+        if (!validateCpf(cpf)) {
             setCpfError('CPF inválido')
 
             return
@@ -92,31 +92,8 @@ const Login = () => {
                 </Box>
             </Box>
             <Box className={'mt-2'} component="form" onSubmit={handleSubmit} noValidate>
-                <Input
-                    id="cpf"
-                    name="cpf"
-                    label={<Word width={64} height={24} path="sistema.inputs.cpf"/>}
-                    type={'text'}
-                    value={cpf}
-                    required={true}
-                    fullWidth={true}
-                    disabled={loading}
-                    error={cpfError !== ''}
-                    mask={'000.000.000-00'}
-                    onChange={(e) => {setCpf(e.target.value)}}
-                    helperText={cpfError}
-                />
-                <Input
-                    id="password"
-                    name="password"
-                    label={<Word width={64} height={24} path="sistema.inputs.senha"/>}
-                    type='password'
-                    required={true}
-                    fullWidth={true}
-                    disabled={loading}
-                    inputCustom='Password'
-                    onChange={(e) => {setPassword(e.target.value)}}
-                />
+                <TextField label='CPF' value={cpf} onChange={(e) => setCpf(e.target.value)} />
+                <TextField label='Senha' value={password} onChange={(e) => setPassword(e.target.value)} />
                 <LoadingButton loading={loading} className={'mt-6 mb-4 bg-blue-500'} type="submit" fullWidth variant="contained">
                     <Word width={64} path="sistema.botoes.entrar"/>
                 </LoadingButton>

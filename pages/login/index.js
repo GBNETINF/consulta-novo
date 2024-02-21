@@ -84,10 +84,10 @@ const Login = () => {
                 />
                 <Box className={'grid justify-items-center'}>
                     <Typography component="body2" align="center">
-                        Governo do Estado de São Paulo
+                        <Word width={200} path="governo.governo"/>
                     </Typography>
                     <Typography className={'uppercase font-bold'} component="h1" variant="h5" align="center">
-                        Secretaria de Estado da Saúde
+                        <Word width={300} height={32} path="governo.secretaria"/>
                     </Typography>
                 </Box>
             </Box>
@@ -95,7 +95,7 @@ const Login = () => {
                 <Input
                     id="cpf"
                     name="cpf"
-                    label="CPF"
+                    label={<Word width={64} height={24} path="sistema.inputs.cpf"/>}
                     type={'text'}
                     value={cpf}
                     required={true}
@@ -109,7 +109,7 @@ const Login = () => {
                 <Input
                     id="password"
                     name="password"
-                    label="Senha"
+                    label={<Word width={64} height={24} path="sistema.inputs.senha"/>}
                     type='password'
                     required={true}
                     fullWidth={true}
@@ -123,7 +123,7 @@ const Login = () => {
                 <Grid container>
                     <Grid item xs>
                         <Link href="#" variant="body2">
-                            Esqueceu sua senha?
+                            <Word width={150} path="sistema.links.esqueceu_senha"/>
                         </Link>
                     </Grid>
                 </Grid>

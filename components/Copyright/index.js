@@ -1,4 +1,5 @@
 import Typography from "@mui/material/Typography";
+import { Word } from "@/components";
 
 /**
  * @returns {JSX.Element}
@@ -7,11 +8,11 @@ import Typography from "@mui/material/Typography";
 const Copyright = () => {
     return (
         <Typography variant="p" color="text.secondary" align="center">
-            {'Copyright ©'}
+            <Word width={164} path="sistema.copyright.default" />
             <span className={'mx-1'}>
-                {'GB-NET'}
+                <Word width={164} path="sistema.copyright.empresa" />
             </span>
-            {'2009-' + new Date().getFullYear() + '.'}
+            <Word width={164} path="sistema.copyright.ano_inicio" />{'-' + new Date().getFullYear() + '.'}
         </Typography>
     );
 }

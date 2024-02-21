@@ -1,5 +1,17 @@
 {
+  "copyright": {
+    "default": "Copyright ©",
+    "empresa": "GB-NET",
+    "ano_inicio": "2009"
+  },
+  "links": {
+    "esqueceu_senha": "Esqueceu sua senha?"
+  },
   "botoes": {
     "entrar": "Entrar"
+  },
+  "inputs": {
+    "cpf": "CPF",
+    "senha": "Senha"
   }
 }

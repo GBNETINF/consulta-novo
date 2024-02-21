@@ -2,7 +2,7 @@ import {getDictionary} from "@/utils/dictionary";
 import {useState} from "react";
 import {Skeleton} from "@mui/material";
 
-export default function Word({path, width}) {
+export default function Word({path, width, height = 16, debug = false}) {
     const dictionary = path.split('.').shift()
     const [loading, setLoading] = useState(true)
     const [word, setWord] = useState('')
@@ -12,18 +12,17 @@ export default function Word({path, width}) {
         let sections = path.split('.')
         sections.shift()
 
-        let word = ''
+        let word = dict
 
-        for (let index in sections) {
-            word = sections[index]
-        }
+        for (let index in sections)
+            word = word[sections[index]]
 
         setWord(word)
     }
 
-    loadWord().then(() => setLoading(false))
+    loadWord().then(() => setLoading(debug))
 
     return (
-        <>{!loading ? word : (<Skeleton variant="rounded" width={width} height={16} animation="wave"></Skeleton>)}</>
+        <>{!loading ? word : (<Skeleton variant="rounded" width={width} height={height} animation="wave"></Skeleton>)}</>
     )
 }

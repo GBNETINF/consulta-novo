@@ -2,9 +2,14 @@ import {Box, Toolbar, Typography} from "@mui/material";
 import {ListPages} from "@/components/Layout/_components/Content/_components";
 
 /**
+ * Componente do conteúdo
+ *
  * @param children
- * @param name
+ *      Componente filho que será inserido dentro do layout.
+ * @param {String} name
+ *      Nome da página atual do layout.
  * @param list
+ *      Lista do breadcrumb do layout
  * @returns {JSX.Element}
  * @constructor
  */

@@ -3,9 +3,14 @@ import {AppBar, ConfigMenu, NotifyMenu} from "./_components";
 import {Toolbar, IconButton, Box} from "@mui/material";
 
 /**
- * @param openMenu
- * @param toggleMenu
- * @param menuwidth
+ * Componente do cabeçalho
+ *
+ * @param {Boolean} openMenu
+ *      Status em que o menu lateral se encontra (aberto|fechado)
+ * @param {Function} toggleMenu
+ *      Função para fechar o menu
+ * @param {int} menuwidth
+ *      Tamanho do menu
  * @returns {JSX.Element}
  * @constructor
  */

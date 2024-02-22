@@ -2,6 +2,7 @@ import {useState, useEffect} from "react";
 import {Header, Menu, Content} from "./_components";
 import {Box, CssBaseline} from "@mui/material";
 import {getSession, setSession} from "@/utils/session";
+import {Alert} from "@/components";
 
 /**
  * Tamanho do menu.

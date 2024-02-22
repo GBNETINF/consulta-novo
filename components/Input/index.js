@@ -4,28 +4,25 @@ import {Password} from "@/components/Input/_components";
 import {useState} from "react";
 
 /**
- * @param props
- * @param props.id
- * @param props.name
- * @param props.label
- * @param props.type
- * @param props.value
- * @param props.onChange
- * @param props.required
- * @param props.fullWidth
+ * Componente de Input
  *
- * @param props.error
- *      @description Define a borda do input vermelha
- *
- * @param props.helperText
- *      @description Texto auxiliar abaixo do input
- *
- * @param props.custom
- *      @options {Password, CPF, ...}
- *
- * @param props.mask
- *      @example 'CPF, Phone'
- *
+ * @param {object} props
+ * @param {string} props.id
+ * @param {string} props.name
+ * @param {string} props.label
+ * @param {string} props.type
+ * @param {string} props.value
+ * @param {function} props.onChange
+ * @param {boolean} props.required
+ * @param {boolean} props.fullWidth
+ * @param {boolean} props.error
+ *      Define a borda do input vermelha
+ * @param {string} props.helperText
+ *      Texto auxiliar abaixo do input
+ * @param {string} props.custom
+ *      Inputs customizados. @Option: {Password, ...}
+ * @param {string} props.mask
+ *      Mascara do input
  * @returns {JSX.Element}
  * @constructor
  */

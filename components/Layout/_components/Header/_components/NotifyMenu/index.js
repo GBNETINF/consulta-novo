@@ -3,6 +3,8 @@ import {Menu, Divider, IconButton, Tooltip, Typography, Box, Badge} from '@mui/m
 import {Icon} from "@/components";
 
 /**
+ * Componente de notificações do cabeçalho
+ *
  * @returns {JSX.Element}
  * @constructor
  */

@@ -1,16 +1,21 @@
 /**
- * Imagem
+ * Componente de Imagem
  *  Obs: Evita notices no terminal
  *
- * @param src
- * @param alt
- * @param width
- * @param height
- * @param type
- *      @description Tipo da imagem.
- *      @example 'image/svg'
- * @param loading
- * @param className
+ * @param {string} src
+ *      Caminho da imagem
+ * @param {string} alt
+ *      Descrição
+ * @param {int} width
+ *      Largura
+ * @param {int} height
+ *      Altura
+ * @param {string} type
+ *      Tipo da imagem. Ex.: 'image/svg'
+ * @param {string} loading
+ *      Animação de carregamento
+ * @param {string} className
+ *      Classe
  * @returns {JSX.Element}
  * @constructor
  */

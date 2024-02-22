@@ -6,9 +6,20 @@ import {Icon} from "@/components";
 /**
  * Grupo de itens do menu.
  *
- * @param item
+ * @param {object} item
+ *      Objeto do grupo do menu
+ * @param {string} item.id
+ *      Identificador do grupo
+ * @param {string} item.icone
+ *      Icone do grupo
+ * @param {string} item.nome
+ *      Nome do grupo
+ * @param {object} item.itens
+ *      Objeto dos itens de detro do grupo
  * @param {Boolean} openMenu
- * @param sx
+ *      Status em que o menu lateral se encontra (aberto|fechado)
+ * @param {object} sx
+ *      Style do MaterialUi
  * @returns {JSX.Element}
  */
 const ItemGroup = ({item, openMenu, sx}) => {

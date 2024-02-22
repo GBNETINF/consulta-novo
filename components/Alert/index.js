@@ -33,24 +33,21 @@ function treatPosition(position = '') {
 
 /**
  * Alert com SnackBar
- * @param open
- * @param message
- * @param severity
- *      @description Define o cor
- *      @example {success, info, warning, error}
- *      @default error
- * @param variant
- *      @description Define o estilo
- *      @example {outlined, filled}
- *      @default filled
- * @param position
- *      @description Define a posição em vertical e horizontal
- *      @example {tc => Top & Center, bl => Bottom & Left}
- *      @default tc
- * @param hideDuration
- *      @default 6000
- * @param handlleClose
- *      @description Função para fechar o alert
+ *
+ * @param {boolean} open
+ *      Status se vai exibir (true|false)
+ * @param {string} message
+ *      Mensagem
+ * @param {string} severity
+ *      Define o cor. @Option: {success, info, warning, error}
+ * @param {string} variant
+ *      Define o estilo. @Option: {outlined, filled}
+ * @param {string} position
+ *      Define a posição em vertical e horizontal. @Option: {tc, bl, ...}
+ * @param {int} hideDuration
+ *      Tempo de duração
+ * @param {function} handlleClose
+ *      Função para fechar o alert
  * @returns {Element}
  * @constructor
  */

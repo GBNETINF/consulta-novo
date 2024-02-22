@@ -1,8 +1,10 @@
 import {Breadcrumbs, Typography} from "@mui/material";
 
 /**
+ * Componente de lista de caminho das paginas
  *
  * @param list
+ *      Lista do breadcrumb do layout
  * @returns {JSX.Element}
  * @constructor
  */

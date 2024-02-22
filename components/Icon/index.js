@@ -2,10 +2,13 @@ import {createElement} from "react";
 import * as icons from "@mui/icons-material";
 
 /**
- * Retorna o componente do icone
+ * Componente de icone
  * Obs: facilita a importação dos icones
- * @param name
- * @param props
+ *
+ * @param {string} name
+ *      Nome do icone
+ * @param {object} props
+ *      Propriedades do icone
  * @returns {React.DetailedReactHTMLElement<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>}
  * @constructor
  */

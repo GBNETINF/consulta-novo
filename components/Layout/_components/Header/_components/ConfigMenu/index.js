@@ -14,6 +14,8 @@ function stringAvatar(name) {
 }
 
 /**
+ * Componente de configurações do cabeçalho
+ *
  * @returns {JSX.Element}
  * @constructor
  */

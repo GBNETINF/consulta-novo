@@ -7,13 +7,11 @@ import {useEffect, useState} from "react";
  * @description atribua esse componenet na props "endAdornment" para possição end ou na props "startAdornment" para possição start
  *
  * @param handleClick
- *      @description Função de onClick
+ *      Função de onClick
  * @param type
- *      @description Type do input
+ *      Type do input
  * @param position
- *      @description A possição do Adornmernt
- *      @example {start, end}
- *      @default end
+ *      A possição do Adornmernt. @Option: {start, end}
  * @returns {JSX.Element}
  * @constructor
  */

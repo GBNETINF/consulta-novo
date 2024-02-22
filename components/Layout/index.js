@@ -1,6 +1,7 @@
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import {Header, Menu, Content} from "./_components";
 import {Box, CssBaseline} from "@mui/material";
+import {getSession, setSession} from "@/utils/session";
 
 /** Tamanho do menu */
 const menuwidth = 240;
@@ -16,8 +17,13 @@ const Layout = ({children, name, list}) => {
     const [openMenu, setOpenMenu] = useState(true);
 
     const toggleMenu = () => {
+        setSession('menuOpen', !openMenu)
         setOpenMenu(!openMenu);
     };
+
+    useEffect(() => {
+        setOpenMenu(getSession('menuOpen'))
+    }, []);
 
     return (
         <Box sx={{display: 'flex'}}>

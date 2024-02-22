@@ -4,3 +4,17 @@ const dictionaries = {
 }
 
 export const getDictionary = async (dictonary) => dictionaries[dictonary]()
+
+export async function loadWord(path) {
+    let dictionary = path.split('.').shift()
+    let dict = await getDictionary(dictionary)
+    let sections = path.split('.')
+    sections.shift()
+
+    let word = dict
+
+    for (let index in sections)
+        word = word[sections[index]]
+
+    return word
+}

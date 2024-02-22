@@ -14,5 +14,8 @@
   "inputs": {
     "cpf": "CPF",
     "senha": "Senha"
+  },
+  "titles": {
+    "notificacao": "Notificações"
   }
 }

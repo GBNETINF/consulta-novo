@@ -1,5 +1,6 @@
 import {useState, useEffect} from "react";
 import {useRouter} from "next/router";
+import {getSession} from "@/utils/session";
 import {Copyright, Icon, Word} from "@/components";
 import {fetchWithCredentials} from "@/utils/fetch";
 import {Drawer, Item, ItemGroup} from "@/components/Layout/_components/Menu/_components";
@@ -89,7 +90,7 @@ const Menu = ({openMenu, toggleMenu, menuwidth}) => {
                 :
                     (<Box className={(openMenu ? 'h-[89%]' : 'h-[93%]') + ' overflow-y-auto overflow-x-hidden sys-scrollbar text-wrap'}>
                         <ListItemButton href='' sx={{}}>
-                            <ListItemIcon title='loading'>
+                            <ListItemIcon title='loading' className={!openMenu ? 'ml-1' : ''}>
                                 <Skeleton variant="rounded" width={25} height={25} animation="wave"/>
                             </ListItemIcon>
                             <Skeleton variant="rounded" width={120} height={16} animation="wave"/>

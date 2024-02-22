@@ -11,7 +11,7 @@ const Item = ({item, openMenu, onClick, sx, children}) => {
 
     return (
         <ListItemButton href={item.href} onClick={onClick} sx={sx}>
-            <ListItemIcon title={item.nome}>
+            <ListItemIcon title={item.nome} className={!openMenu ? 'ml-1' : ''}>
                 <Icon name={item.icone} />
             </ListItemIcon>
             <ListItemText primary={openMenu ? item.nome : ''}/>

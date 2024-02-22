@@ -1,129 +1,64 @@
-import {FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton, FormHelperText} from "@mui/material";
-import {Icon} from "@/components";
-import {useState, forwardRef} from "react";
-import {IMaskInput} from "react-imask";
+import {FormControl, InputLabel, OutlinedInput, FormHelperText} from "@mui/material";
+import {Mask} from "@/components/Input/_components/Mask"
+import {Password} from "@/components/Input/_components";
+import {useState} from "react";
 
 /**
- * @param id
- * @param name
- * @param label
- * @param type
- * @param value
- * @param required
- * @param disabled
- * @param autoFocus
- * @param fullWidth
- * @param error
- * @param variant
- * @param helperText
- * @param margin
- * @param endAdornment
- * @param autoComplete
- * @param maxLength
- * @param onChange
- * @param inputCustom
- *       @options {Password, ...}
- * @param inputMask
- *      @options {CPF, Phone, ...}
+ * @param props
+ * @param props.id
+ * @param props.name
+ * @param props.label
+ * @param props.type
+ * @param props.value
+ * @param props.onChange
+ * @param props.required
+ * @param props.fullWidth
+ *
+ * @param props.error
+ *      @description Define a borda do input vermelha
+ *
+ * @param props.helperText
+ *      @description Texto auxiliar abaixo do input
+ *
+ * @param props.custom
+ *      @options {Password, CPF, ...}
+ *
+ * @param props.mask
+ *      @example 'CPF, Phone'
+ *
  * @returns {JSX.Element}
  * @constructor
  */
-const Index = ({
-    id = '',
-    name = '',
-    label = '',
-    type = 'text',
-    value,
-    required = false,
-    disabled = false,
-    autoFocus = false,
-    fullWidth = false,
-    error = false,
-    variant = 'outlined',
-    margin = 'normal',
-    autoComplete = '',
-    helperText = '',
-    mask = '',
-    maxLength,
-    endAdornment,
-    onChange,
-    inputCustom = '',
-}) => {
-    let MaskInput
+const Input = (props) => {
+    const {custom, error, helperText, fullWidth, type, ...inputProps} = props
 
-    const [typeInput, setTypeInput] = useState(type)
+    const formProps = {error, variant: 'outlined', margin: 'normal', fullWidth}
 
-    /** Altera o "Type" para text */
-    function setTypeText() {
-        setTypeInput('text')
-    }
-
-    /** Altera o "Type" para password */
-    function setTypePassword() {
-        setTypeInput('password')
-    }
+    const [inputType, setInputType] = useState(type)
 
     /** Define padrões de input */
-    switch (inputCustom) {
-        case 'Password':
-            endAdornment = (
-                <InputAdornment position="end">
-                    <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={setTypeText}
-                        onMouseDown={setTypePassword}
-                        edge="end"
-                    >
-                        {typeInput === 'text' ? <Icon name={'VisibilityOff'}/> : <Icon name={'Visibility'}/>}
-                    </IconButton>
-                </InputAdornment>
-            )
-            autoComplete = "current-password"
+    switch (custom) {
+        case "Password":
+            inputProps.endAdornment = (<Password type={inputType} handleClick={() => {
+                setInputType(inputType === 'password' ? 'text' : 'password')
+            }}/>)
+            inputProps.autoComplete = "current-password"
             break;
     }
 
-    if (mask !== '')
-    {
-        MaskInput = forwardRef(function MaskInput(props, ref) {
-            const { onChange, ...other } = props;
-            return (
-                <IMaskInput
-                    {...other}
-                    mask={mask}
-                    definitions={{
-                        '0': /[0-9]/,
-                        '#': /[1-9]/,
-                    }}
-                    inputRef={ref}
-                    onAccept={(value) => onChange({ target: { name: props.name, value } })}
-                    overwrite
-                />
-            );
-        });
+    /** Define a mascara */
+    if (inputProps.mask !== undefined && inputProps.mask !== '') {
+        inputProps.inputProps = {mask: inputProps.mask}
+        inputProps.inputComponent = Mask
     }
-   
 
     return (
-        <FormControl error={error} variant={variant} margin={margin} fullWidth={fullWidth}>
-            <InputLabel htmlFor={id}>{label}</InputLabel>
-            <OutlinedInput
-                id={id}
-                name={name}
-                label={label}
-                value={value}
-                type={typeInput}
-                required={required}
-                disabled={disabled}
-                endAdornment={endAdornment}
-                autoComplete={autoComplete}
-                autoFocus={autoFocus}
-                onChange={onChange}
-                maxLength={maxLength}
-                inputComponent={MaskInput}
-            />
-            { helperText ? <FormHelperText id={id}>{helperText}</FormHelperText> : ''}
+        <FormControl {...formProps}>
+            {props.label ? <InputLabel htmlFor={props.id} required={props.required} children={props.label}/> : <></>}
+            <OutlinedInput  type={inputType} {...inputProps} />
+            {helperText ? <FormHelperText id={props.id} children={helperText}/> : <></>}
         </FormControl>
     )
 }
 
-export default Index
+export default Input

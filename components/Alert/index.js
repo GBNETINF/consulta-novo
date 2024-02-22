@@ -36,24 +36,32 @@ function treatPosition(position = '') {
  * @param open
  * @param message
  * @param severity
- * @param position
- * @param hideDuration
+ *      @description Define o cor
+ *      @example {success, info, warning, error}
+ *      @default error
  * @param variant
+ *      @description Define o estilo
+ *      @example {outlined, filled}
+ *      @default filled
+ * @param position
+ *      @description Define a posição em vertical e horizontal
+ *      @example {tc => Top & Center, bl => Bottom & Left}
+ *      @default tc
+ * @param hideDuration
+ *      @default 6000
  * @param handlleClose
  * @returns {Element}
  * @constructor
  */
 const Alert = ({
-                   open = false,
-                   message = '',
-                   severity = 'error',
-                   position = 'tc',
-                   hideDuration = 6000,
-                   variant = 'filled',
-                   handlleClose = () => {
-                   }
-               }) => {
-
+        open = false,
+        message = '',
+        severity = 'error',
+        variant = 'filled',
+        position = 'tc',
+        hideDuration = 6000,
+        handlleClose = () => {}
+    }) => {
     return (
         <Snackbar
             open={open}

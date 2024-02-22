@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useRouter} from 'next/router'
 import {Copyright, Alert, Image, Input, Word} from "@/components";
 import {Container, Box, Typography, Grid, Link, TextField} from "@mui/material";
@@ -8,14 +8,26 @@ import {setSession, destroySession} from '@/utils/session'
 import {validateCpf} from "@/utils/validations";
 
 const Login = () => {
+    destroySession('token')
+
     const router = useRouter()
+
     const [loading, setLoading] = useState(false)
     const [alert, setAlert] = useState({open: false, message: ''})
-    const [cpf, setCpf] = useState('')
-    const [cpfError, setCpfError] = useState('')
-    const [password, setPassword] = useState('')
 
-    destroySession('token')
+    /** Controladores do forms */
+    const [form, setForm] = useState({
+        cpf: {value: '', error: ''},
+        password: {value: '', error: ''}
+    })
+
+    const formSetError = (field, message) => {
+        setForm({...form, [field]: {value: form[field].value, error: message} })
+    }
+
+    const formSetValue = (field, value) => {
+        setForm({...form, [field]: {value: value, error: '' }})
+    }
 
     /**
      * Trata o submit do formulário.
@@ -27,17 +39,20 @@ const Login = () => {
     async function handleSubmit(event) {
         event.preventDefault()
 
-        if (!validateCpf(cpf)) {
-            setCpfError('CPF inválido')
+        if (!validateCpf(form.cpf.value)) {
+            formSetError('cpf', 'CPF inválido')
 
             return
         }
 
-        setCpfError('')
         setLoading(true)
 
         const response = await fetchWithoutCredentials('auth/login', {
-            method: 'POST', body: JSON.stringify({cpf, password}),
+            method: 'POST',
+            body: JSON.stringify({
+                cpf: form.cpf.value,
+                password: form.password.value
+            }),
         })
 
         if (response.ok) {
@@ -92,8 +107,32 @@ const Login = () => {
                 </Box>
             </Box>
             <Box className={'mt-2'} component="form" onSubmit={handleSubmit} noValidate>
-                <TextField label='CPF' value={cpf} onChange={(e) => setCpf(e.target.value)} />
-                <TextField label='Senha' value={password} onChange={(e) => setPassword(e.target.value)} />
+                <Input
+                    id='cpf'
+                    name="cpf"
+                    label={<Word width={30} path="sistema.inputs.cpf" />}
+                    type='text'
+                    mask={'000.000.000-00'}
+                    value={form.cpf.value}
+                    onChange={(e) => formSetValue(e.target.name, e.target.value)}
+                    error={form.cpf.error !== ''}
+                    helperText={form.cpf.error}
+                    required={true}
+                    fullWidth={true}
+                />
+                <Input
+                    id='password'
+                    name="password"
+                    label={<Word width={30} path="sistema.inputs.senha" />}
+                    type='password'
+                    custom={'Password'}
+                    value={form.password.value}
+                    onChange={(e) => formSetValue(e.target.name, e.target.value)}
+                    error={form.password.error !== ''}
+                    helperText={form.password.error}
+                    required={true}
+                    fullWidth={true}
+                />
                 <LoadingButton loading={loading} className={'mt-6 mb-4 bg-blue-500'} type="submit" fullWidth variant="contained">
                     <Word width={64} path="sistema.botoes.entrar"/>
                 </LoadingButton>

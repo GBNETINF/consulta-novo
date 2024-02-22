@@ -1,6 +1,7 @@
-import {useState, Fragment} from 'react';
+import {useState, Fragment, useEffect} from 'react';
 import {Avatar, Menu, MenuItem, Divider, IconButton, Tooltip, Typography, Box} from '@mui/material';
-import {Icon} from "@/components";
+import {Icon, Word} from "@/components";
+import {loadWord} from "@/utils/dictionary";
 
 /**
  * Retona as duas primiras letras no nome
@@ -22,6 +23,13 @@ function stringAvatar(name) {
 const ConfigMenu = () => {
 
     const [anchorEl, setAnchorEl] = useState(null);
+    const [title, setTitle] = useState('...')
+    const [titles, setTitles] = useState({
+        configuracao: '...',
+        manual: '...',
+        alterar_foto: '...',
+        alterar_senha: '...'
+    })
 
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -31,9 +39,29 @@ const ConfigMenu = () => {
         setAnchorEl(null);
     };
 
+    /**
+     * Recupera todos os titles utilizados no componente.
+     *
+     * @returns {Promise<void>}
+     */
+    async function getTitles() {
+        let responseTitles = {}
+
+        responseTitles.configuracao = await loadWord('sistema.titles.configuracao')
+        responseTitles.manual = await loadWord('sistema.titles.manual')
+        responseTitles.alterar_foto = await loadWord('sistema.titles.alterar_foto')
+        responseTitles.alterar_senha = await loadWord('sistema.titles.alterar_senha')
+
+        setTitles(responseTitles)
+    }
+
+    useEffect(() => {
+        getTitles()
+    }, []);
+
     return (
         <Fragment>
-            <Tooltip title="Configurações">
+            <Tooltip title={titles.configuracao}>
                 <IconButton
                     onClick={handleClick}
                     size="small"
@@ -80,7 +108,7 @@ const ConfigMenu = () => {
                 anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
             >
                 <Box className={'grid flex-col justify-items-center py-4 px-10'}>
-                    <Tooltip title="Alterar foto">
+                    <Tooltip title={titles.alterar_foto}>
                         <Avatar onClick={handleClose} className={'m-0 cursor-pointer'}/>
                     </Tooltip>
                     <Typography className={'mt-2'} variant="p" align="center">
@@ -93,12 +121,12 @@ const ConfigMenu = () => {
                         008.159.932/01
                     </Typography>
                     <Box className={'flex flex-row gap-2 mt-4'}>
-                        <Tooltip title="Alterar senha">
+                        <Tooltip title={titles.alterar_senha}>
                             <Avatar onClick={handleClose} className={'cursor-pointer'}>
                                 <Icon name={'Key'}/>
                             </Avatar>
                         </Tooltip>
-                        <Tooltip title="Manual">
+                        <Tooltip title={titles.manual}>
                             <Avatar onClick={handleClose} className={'cursor-pointer'}>
                                 <Icon name={'AutoStories'}/>
                             </Avatar>
@@ -119,7 +147,7 @@ const ConfigMenu = () => {
                 <Divider/>
                 <Box className={'flex flex-col justify-items-center px-4'}>
                     <Typography className={'text-xs'} variant="p" color="text.secondary" align="center">
-                        Ultimo acesso: 15/02/2024
+                        <Word width={128} path={'sistema.infos.ultimo_acesso'} />: 15/02/2024
                     </Typography>
                 </Box>
             </Menu>

@@ -1,6 +1,7 @@
-import {useState, Fragment} from 'react';
+import {useState, Fragment, useEffect} from 'react';
 import {Menu, Divider, IconButton, Tooltip, Typography, Box, Badge} from '@mui/material';
-import {Icon} from "@/components";
+import {Icon, Word} from "@/components";
+import {loadWord} from "@/utils/dictionary";
 
 /**
  * Componente de notificações do cabeçalho
@@ -13,16 +14,23 @@ const NotifyMenu = () => {
     const [anchorEl, setAnchorEl] = useState(null);
 
     const open = Boolean(anchorEl);
+    const [title, setTitle] = useState('...')
+
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
+
     const handleClose = () => {
         setAnchorEl(null);
     };
 
+    useEffect(() => {
+        loadWord('sistema.titles.notificacao').then((word) => setTitle(word))
+    }, []);
+
     return (
         <Fragment>
-            <Tooltip title="Notificações">
+            <Tooltip title={title}>
                 <IconButton
                     onClick={handleClick}
                     size="small"
@@ -72,7 +80,7 @@ const NotifyMenu = () => {
             >
                 <Box className={'grid flex-col justify-items-center px-4 py-2'}>
                     <Typography className={'text-sm'} variant="p" color="text.secondary" align="center">
-                        Notificações
+                        <Word width={128} path={'sistema.titles.notificacao'}/>
                     </Typography>
                 </Box>
                 <Box className={'max-w-sm m-5 pl-2 border-l-2 border-l-sys-gray-light'}>
@@ -100,7 +108,7 @@ const NotifyMenu = () => {
                 <Divider className={'mt-5'}/>
                 <Box className={'flex flex-col justify-items-center px-4 pt-2'}>
                     <Typography className={'text-xs'} variant="p" color="text.secondary" align="center">
-                        Limpar tudo
+                        <Word width={128} path={'sistema.links.limpar_tudo'}/>
                     </Typography>
                 </Box>
             </Menu>

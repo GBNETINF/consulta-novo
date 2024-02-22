@@ -2,7 +2,22 @@ import {IconButton, InputAdornment} from "@mui/material";
 import {Icon} from "@/components";
 import {useEffect, useState} from "react";
 
-const Password = ({handleClick, type, position='end'}) => {
+/**
+ * Atribui botão para troca de type (text -> password)
+ * @description atribua esse componenet na props "endAdornment" para possição end ou na props "startAdornment" para possição start
+ *
+ * @param handleClick
+ *      @description Função de onClick
+ * @param type
+ *      @description Type do input
+ * @param position
+ *      @description A possição do Adornmernt
+ *      @example {start, end}
+ *      @default end
+ * @returns {JSX.Element}
+ * @constructor
+ */
+const Password = ({handleClick, type, position = 'end'}) => {
 
     const [icon, setIcon] = useState('VisibilityOff')
 

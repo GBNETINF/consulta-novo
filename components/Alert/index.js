@@ -50,6 +50,7 @@ function treatPosition(position = '') {
  * @param hideDuration
  *      @default 6000
  * @param handlleClose
+ *      @description Função para fechar o alert
  * @returns {Element}
  * @constructor
  */

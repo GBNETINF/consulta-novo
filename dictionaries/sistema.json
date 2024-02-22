@@ -5,7 +5,8 @@
     "ano_inicio": "2009"
   },
   "links": {
-    "esqueceu_senha": "Esqueceu sua senha?"
+    "esqueceu_senha": "Esqueceu sua senha?",
+    "limpar_tudo": "Limpar tudo"
   },
   "botoes": {
     "entrar": "Entrar",
@@ -16,6 +17,13 @@
     "senha": "Senha"
   },
   "titles": {
-    "notificacao": "Notificações"
+    "notificacao": "Notificações",
+    "configuracao": "Configurações",
+    "alterar_senha": "Alterar senha",
+    "alterar_foto": "Alterar foto",
+    "manual": "Manual"
+  },
+  "infos": {
+    "ultimo_acesso": "Último acesso"
   }
 }

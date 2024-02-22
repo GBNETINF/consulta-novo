@@ -4,10 +4,12 @@ import {Item} from "@/components/Layout/_components/Menu/_components/";
 import {Icon} from "@/components";
 
 /**
- * Item simplificado do menu
+ * Grupo de itens do menu.
  *
+ * @param item
+ * @param {Boolean} openMenu
+ * @param sx
  * @returns {JSX.Element}
- * @constructor
  */
 const ItemGroup = ({item, openMenu, sx}) => {
 

@@ -18,11 +18,14 @@ import {
 import {LoadingButton} from "@mui/lab";
 
 /**
- * @param openMenu
- * @param toggleMenu
- * @param menuwidth
+ * Componente de menu lateral
+ *
+ * @param {Boolean} openMenu
+ *      Status em que o menu lateral se encontra (aberto|fechado)
+ * @param {Function} toggleMenu
+ *      Função que será executada
+ * @param {int} menuwidth
  * @returns {JSX.Element}
- * @constructor
  */
 const Menu = ({openMenu, toggleMenu, menuwidth}) => {
 
